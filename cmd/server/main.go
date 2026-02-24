@@ -9,13 +9,24 @@ import (
 	"github.com/firefly/packstring/internal/handlers"
 )
 
-func main() {
-	// Parse templates: each page template is combined with the base layout
+// mustParseTemplate builds a template set for a single page file,
+// combining it with the base layout and all partials.
+func mustParseTemplate(page string) *template.Template {
 	tmpl := template.Must(template.ParseGlob(filepath.Join("templates", "layouts", "*.html")))
 	template.Must(tmpl.ParseGlob(filepath.Join("templates", "partials", "*.html")))
-	template.Must(tmpl.ParseGlob(filepath.Join("templates", "pages", "*.html")))
+	template.Must(tmpl.ParseFiles(filepath.Join("templates", "pages", page)))
+	return tmpl
+}
 
-	pages := handlers.NewPages(tmpl)
+func main() {
+	// Build a separate template set per page to avoid "content" block collisions
+	templates := map[string]*template.Template{
+		"home":    mustParseTemplate("home.html"),
+		"trips":   mustParseTemplate("trips.html"),
+		"fishing": mustParseTemplate("fishing.html"),
+	}
+
+	pages := handlers.NewPages(templates)
 
 	mux := http.NewServeMux()
 
@@ -24,6 +35,8 @@ func main() {
 
 	// Pages
 	mux.HandleFunc("GET /{$}", pages.HomePage)
+	mux.HandleFunc("GET /trips/{$}", pages.TripsHub)
+	mux.HandleFunc("GET /trips/fishing/{$}", pages.FishingPage)
 
 	// Contact form
 	contact := handlers.NewContact()

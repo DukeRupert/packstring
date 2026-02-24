@@ -1,0 +1,45 @@
+{{define "trip-section"}}
+<div class="trip-grid grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+    <!-- Placeholder image -->
+    <div class="h-64 md:h-80 bg-[#1B4332]/10 rounded-lg flex items-center justify-center">
+        <span class="text-[#1B4332]/40 font-medium">{{.Title}}</span>
+    </div>
+
+    <!-- Details -->
+    <div>
+        <h2 class="text-2xl md:text-3xl font-bold text-[#1B4332] mb-1">{{.Title}}</h2>
+        <p class="text-[#B68D40] font-semibold mb-4">{{.Tagline}}</p>
+        <p class="text-[#1A1A1A]/80 leading-relaxed mb-6">{{.Description}}</p>
+
+        {{if .Waters}}
+        <div class="mb-4">
+            <h3 class="font-semibold text-[#1B4332] text-sm uppercase tracking-wide mb-2">Waters</h3>
+            <p class="text-[#1A1A1A]/70 text-sm">{{range $i, $w := .Waters}}{{if $i}}, {{end}}{{$w}}{{end}}</p>
+        </div>
+        {{end}}
+
+        {{if .Includes}}
+        <div class="mb-4">
+            <h3 class="font-semibold text-[#1B4332] text-sm uppercase tracking-wide mb-2">What's Included</h3>
+            <ul class="text-[#1A1A1A]/70 text-sm space-y-1">
+                {{range .Includes}}
+                <li class="flex items-start gap-2">
+                    <span class="text-[#B68D40] mt-0.5">&#10003;</span>
+                    <span>{{.}}</span>
+                </li>
+                {{end}}
+            </ul>
+        </div>
+        {{end}}
+
+        <div class="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-[#1A1A1A]/70 mb-6">
+            {{if .Duration}}<span>{{.Duration}}</span>{{end}}
+            {{if .Price}}<span class="font-semibold text-[#1B4332]">{{.Price}}</span>{{end}}
+        </div>
+
+        <a href="/contact/?trip={{.Slug}}" class="bg-[#B68D40] text-white px-6 py-3 rounded font-semibold hover:bg-[#a07a30] transition-colors inline-block w-full sm:w-auto text-center">
+            Book This Trip
+        </a>
+    </div>
+</div>
+{{end}}

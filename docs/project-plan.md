@@ -136,16 +136,16 @@ All content uses real trip info from Forrest's current site + placeholder/royalt
 
 #### 1.4 — Trips Hub + Fishing Page (3 hours)
 
-- [ ] Trips overview (`/trips/`): 3 cards linking to fishing, hunting, packages
-- [ ] Fishing page (`/trips/fishing/`): sectioned layout with:
+- [x] Trips overview (`/trips/`): 3 cards linking to fishing, hunting, packages
+- [x] Fishing page (`/trips/fishing/`): sectioned layout with:
   - Jet Boat section
   - Drift Boat section
   - Lake Trips section
   - Wade Trips section
   - Specialty section (pike, ice fishing, bass, salmon)
-- [ ] Each section: placeholder photo, description, includes, duration, price, "Book This Trip" CTA
-- [ ] Sticky or inline "Questions? Call Forrest" element
-- [ ] Verify: sections are scannable, CTAs link to /contact/?trip=xxx
+- [x] Each section: placeholder photo, description, includes, duration, price, "Book This Trip" CTA
+- [x] Sticky or inline "Questions? Call Forrest" element
+- [x] Verify: sections are scannable, CTAs link to /contact/?trip=xxx
 
 **Git checkpoint: "pages: trips hub and fishing detail"**
 

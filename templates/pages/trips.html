@@ -1,0 +1,35 @@
+{{define "content"}}
+
+<!-- Page Hero -->
+<section class="bg-gradient-to-br from-[#1B4332] to-[#143124] text-white">
+    <div class="max-w-6xl mx-auto px-4 py-16 md:py-20 text-center">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">Our Trips</h1>
+        <p class="text-lg text-white/80 max-w-2xl mx-auto">
+            From world-class fishing on the Missouri River to guided hunts across Montana's wildest terrain — choose the adventure that fits you.
+        </p>
+    </div>
+</section>
+
+<!-- Trip Cards -->
+<section class="max-w-6xl mx-auto px-4 py-16 md:py-20">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {{range .TripCards}}
+            {{template "trip-card" .}}
+        {{end}}
+    </div>
+</section>
+
+<!-- Bottom CTA -->
+<section class="bg-[#1B4332]/5">
+    <div class="max-w-3xl mx-auto px-4 py-14 md:py-16 text-center">
+        <h2 class="text-2xl font-bold text-[#1B4332] mb-4">Not Sure Which Trip Is Right for You?</h2>
+        <p class="text-[#1A1A1A]/70 mb-6">
+            Give Forrest a call — he'll help you pick the perfect trip based on your dates, experience level, and what you want out of your time in Montana.
+        </p>
+        <a href="tel:+14064595352" class="bg-[#B68D40] text-white px-8 py-3 rounded font-semibold text-lg hover:bg-[#a07a30] transition-colors inline-block">
+            Call (406) 459-5352
+        </a>
+    </div>
+</section>
+
+{{end}}
