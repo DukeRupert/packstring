@@ -12,6 +12,7 @@ import (
 func main() {
 	// Parse templates: each page template is combined with the base layout
 	tmpl := template.Must(template.ParseGlob(filepath.Join("templates", "layouts", "*.html")))
+	template.Must(tmpl.ParseGlob(filepath.Join("templates", "partials", "*.html")))
 	template.Must(tmpl.ParseGlob(filepath.Join("templates", "pages", "*.html")))
 
 	pages := handlers.NewPages(tmpl)

@@ -5,24 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MT Hunt & Fish Outfitters</title>
     <link rel="stylesheet" href="/static/css/output.css">
+    <style>[x-cloak] { display: none !important; }</style>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://unpkg.com/htmx.org@2.0.4" integrity="sha384-HGfztofotfshcF7+8n44JQL2oJmowVChPTg48S+jvZoztPfvwD79OC/LTtG6dMp+" crossorigin="anonymous"></script>
 </head>
 <body class="bg-[#FEFAE0] text-[#1A1A1A] min-h-screen flex flex-col">
-    <nav class="bg-[#1B4332] text-white p-4">
-        <div class="max-w-6xl mx-auto flex items-center justify-between">
-            <a href="/" class="text-xl font-bold text-[#B68D40]">MT Hunt & Fish Outfitters</a>
-        </div>
-    </nav>
+    {{template "nav" .}}
 
     <main class="flex-1">
         {{block "content" .}}{{end}}
     </main>
 
-    <footer class="bg-[#1B4332] text-white p-6 mt-auto">
-        <div class="max-w-6xl mx-auto text-center text-sm">
-            <p>&copy; 2026 MT Hunt & Fish Outfitters. All rights reserved.</p>
-        </div>
-    </footer>
+    {{template "footer" .}}
 </body>
 </html>
