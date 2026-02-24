@@ -1,16 +1,16 @@
 {{define "nav"}}
-<nav class="bg-[#1B4332] text-white" x-data="{ open: false }">
-    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+<nav class="bg-timber text-cream border-b-2 border-copper" x-data="{ open: false }">
+    <div class="max-w-[1100px] mx-auto px-4 py-4 flex items-center justify-between">
         <!-- Logo -->
-        <a href="/" class="text-xl font-bold text-[#B68D40]">MT Hunt & Fish Outfitters</a>
+        <a href="/" class="font-display text-xl font-bold text-cream">MT Hunt & Fish Outfitters</a>
 
         <!-- Desktop nav (md+) -->
         <div class="hidden md:flex items-center gap-6">
-            <a href="/" class="hover:text-[#B68D40] transition-colors">Home</a>
-            <a href="/trips/" class="hover:text-[#B68D40] transition-colors">Trips</a>
-            <a href="/gallery/" class="hover:text-[#B68D40] transition-colors">Gallery</a>
-            <a href="/contact/" class="hover:text-[#B68D40] transition-colors">Contact</a>
-            <a href="tel:+14064595352" class="bg-[#B68D40] text-white px-4 py-2 rounded font-semibold hover:bg-[#a07a30] transition-colors">
+            <a href="/" class="nav-link font-ui text-[13px] font-semibold uppercase tracking-[0.15em] text-cream/80 hover:text-cream transition-colors">Home</a>
+            <a href="/trips/" class="nav-link font-ui text-[13px] font-semibold uppercase tracking-[0.15em] text-cream/80 hover:text-cream transition-colors">Trips</a>
+            <a href="/gallery/" class="nav-link font-ui text-[13px] font-semibold uppercase tracking-[0.15em] text-cream/80 hover:text-cream transition-colors">Gallery</a>
+            <a href="/contact/" class="nav-link font-ui text-[13px] font-semibold uppercase tracking-[0.15em] text-cream/80 hover:text-cream transition-colors">Contact</a>
+            <a href="tel:+14064595352" class="btn btn-primary">
                 Call Now
             </a>
         </div>
@@ -18,7 +18,7 @@
         <!-- Mobile buttons -->
         <div class="flex items-center gap-4 md:hidden">
             <!-- Phone icon -->
-            <a href="tel:+14064595352" class="text-[#B68D40]" aria-label="Call now">
+            <a href="tel:+14064595352" class="text-copper" aria-label="Call now">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                 </svg>
@@ -34,13 +34,13 @@
     </div>
 
     <!-- Mobile menu panel -->
-    <div x-show="open" x-cloak x-transition class="md:hidden border-t border-white/10">
+    <div x-show="open" x-cloak x-transition class="md:hidden border-t border-timber-edge">
         <div class="px-4 py-4 flex flex-col gap-3">
-            <a href="/" class="hover:text-[#B68D40] transition-colors" @click="open = false">Home</a>
-            <a href="/trips/" class="hover:text-[#B68D40] transition-colors" @click="open = false">Trips</a>
-            <a href="/gallery/" class="hover:text-[#B68D40] transition-colors" @click="open = false">Gallery</a>
-            <a href="/contact/" class="hover:text-[#B68D40] transition-colors" @click="open = false">Contact</a>
-            <a href="tel:+14064595352" class="bg-[#B68D40] text-white px-4 py-2 rounded font-semibold text-center hover:bg-[#a07a30] transition-colors" @click="open = false">
+            <a href="/" class="font-ui text-[13px] font-semibold uppercase tracking-[0.15em] text-cream/80 hover:text-cream transition-colors" @click="open = false">Home</a>
+            <a href="/trips/" class="font-ui text-[13px] font-semibold uppercase tracking-[0.15em] text-cream/80 hover:text-cream transition-colors" @click="open = false">Trips</a>
+            <a href="/gallery/" class="font-ui text-[13px] font-semibold uppercase tracking-[0.15em] text-cream/80 hover:text-cream transition-colors" @click="open = false">Gallery</a>
+            <a href="/contact/" class="font-ui text-[13px] font-semibold uppercase tracking-[0.15em] text-cream/80 hover:text-cream transition-colors" @click="open = false">Contact</a>
+            <a href="tel:+14064595352" class="btn btn-primary text-center" @click="open = false">
                 Call Now
             </a>
         </div>

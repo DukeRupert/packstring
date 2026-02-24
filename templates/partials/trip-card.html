@@ -1,14 +1,14 @@
 {{define "trip-card"}}
-<div class="bg-white rounded-lg shadow-md overflow-hidden flex flex-col">
+<div class="trip-card bg-cream rounded-[4px] flex flex-col">
     <!-- Placeholder image area -->
-    <div class="h-48 bg-[#1B4332]/10 flex items-center justify-center">
-        <span class="text-[#1B4332]/50 font-medium text-sm">{{.Title}}</span>
+    <div class="aspect-[4/3] bg-sand-dk flex items-center justify-center">
+        <span class="font-ui text-stone text-sm">{{.Title}}</span>
     </div>
     <div class="p-6 flex flex-col flex-1">
-        <h3 class="text-xl font-bold text-[#1B4332] mb-2">{{.Title}}</h3>
-        <p class="text-[#1A1A1A]/70 mb-4 flex-1">{{.Description}}</p>
-        <a href="{{.URL}}" class="text-[#B68D40] font-semibold hover:underline">
-            Learn More &rarr;
+        <h3 class="font-display text-lg font-bold text-ink leading-[1.2] mb-2">{{.Title}}</h3>
+        <p class="font-body text-ink-faded text-[15px] leading-[1.7] mb-4 flex-1">{{.Description}}</p>
+        <a href="{{.URL}}" class="btn btn-primary w-full text-center">
+            Learn More
         </a>
     </div>
 </div>

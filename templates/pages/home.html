@@ -1,17 +1,17 @@
 {{define "content"}}
 
 <!-- Hero -->
-<section class="bg-gradient-to-br from-[#1B4332] to-[#143124] text-white">
-    <div class="max-w-6xl mx-auto px-4 py-24 md:py-32 text-center">
-        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">Montana Hunting &amp; Fishing Outfitters</h1>
-        <p class="text-lg md:text-xl text-white/80 max-w-2xl mx-auto mb-10">
+<section class="relative bg-timber overflow-hidden">
+    <div class="max-w-[1100px] mx-auto px-4 py-24 md:py-32 text-center relative z-10">
+        <h1 class="font-display font-[800] text-[clamp(36px,5vw,64px)] leading-[1.05] text-cream mb-6">Montana Hunting &amp; Fishing Outfitters</h1>
+        <p class="font-body text-cream/80 text-lg md:text-xl max-w-2xl mx-auto mb-10">
             Guided fishing and hunting trips from Helena, Montana. Over 25 years on the water.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="/trips/" class="bg-[#B68D40] text-white px-8 py-3 rounded font-semibold text-lg hover:bg-[#a07a30] transition-colors">
+            <a href="/trips/" class="btn btn-primary btn-lg">
                 View Trips
             </a>
-            <a href="/contact/" class="border-2 border-white text-white px-8 py-3 rounded font-semibold text-lg hover:bg-white/10 transition-colors">
+            <a href="/contact/" class="btn btn-outline-light btn-lg">
                 Book a Trip
             </a>
         </div>
@@ -20,23 +20,23 @@
 
 <!-- Quick Intro -->
 <section class="max-w-3xl mx-auto px-4 py-16 md:py-20 text-center">
-    <h2 class="text-3xl font-bold text-[#1B4332] mb-6">Your Guide in Big Sky Country</h2>
-    <p class="text-lg text-[#1A1A1A]/80 leading-relaxed mb-4">
+    <h2 class="font-display font-[800] text-[clamp(26px,3.5vw,42px)] leading-[1.1] text-ink mb-6">Your Guide in Big Sky Country</h2>
+    <p class="font-body text-[15px] leading-[1.7] text-ink-mid mb-4">
         Forrest Fawthrop has spent over 25 years guiding anglers and hunters through some of Montana's
         finest waters and wildest terrain. Based in Helena, MT Hunt &amp; Fish Outfitters offers
         personalized trips on the Missouri River, nearby lakes, and private ranch land throughout
         west-central Montana.
     </p>
-    <p class="text-sm text-[#1A1A1A]/60">
+    <p class="font-mono text-[11px] tracking-[0.08em] text-stone">
         Licensed Montana Outfitter #20194 &middot; USCG Captain #3427176
     </p>
 </section>
 
 <!-- Trip Cards -->
-<section class="bg-[#1B4332]/5 py-16 md:py-20">
-    <div class="max-w-6xl mx-auto px-4">
-        <h2 class="text-3xl font-bold text-[#1B4332] text-center mb-12">Our Trips</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<section class="bg-sand-lt py-16 md:py-20">
+    <div class="max-w-[1100px] mx-auto px-4">
+        <h2 class="font-display font-[800] text-[clamp(26px,3.5vw,42px)] leading-[1.1] text-ink text-center mb-12">Our Trips</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-[2px] bg-sand-dk rounded-[4px] overflow-hidden">
             {{range .TripCards}}
                 {{template "trip-card" .}}
             {{end}}
@@ -45,29 +45,32 @@
 </section>
 
 <!-- Testimonials -->
-<section class="max-w-6xl mx-auto px-4 py-16 md:py-20">
-    <h2 class="text-3xl font-bold text-[#1B4332] text-center mb-12">What Our Clients Say</h2>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {{range .Testimonials}}
-        <blockquote class="bg-white rounded-lg shadow-md p-6 flex flex-col">
-            <p class="text-[#1A1A1A]/80 italic flex-1 mb-4">&ldquo;{{.Quote}}&rdquo;</p>
-            <footer>
-                <cite class="not-italic font-semibold text-[#1B4332]">{{.Name}}</cite>
-                <span class="block text-sm text-[#1A1A1A]/50">{{.Detail}}</span>
-            </footer>
-        </blockquote>
-        {{end}}
+<section class="section--dark">
+    <div class="golden-glow"></div>
+    <div class="max-w-[1100px] mx-auto px-4 py-16 md:py-20 relative z-10">
+        <h2 class="font-display font-[800] text-[clamp(26px,3.5vw,42px)] leading-[1.1] text-cream text-center mb-12">What Our Clients Say</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-[2px] bg-timber rounded-[4px] overflow-hidden">
+            {{range .Testimonials}}
+            <blockquote class="bg-timber-lt rounded-[4px] p-6 flex flex-col">
+                <p class="font-display font-bold italic text-cream flex-1 mb-4">&ldquo;{{.Quote}}&rdquo;</p>
+                <footer>
+                    <cite class="not-italic font-ui font-semibold text-cream text-[13px] uppercase tracking-[0.15em]">{{.Name}}</cite>
+                    <span class="block font-ui text-sm text-stone">{{.Detail}}</span>
+                </footer>
+            </blockquote>
+            {{end}}
+        </div>
     </div>
 </section>
 
 <!-- Seasonal Callout -->
-<section class="bg-[#B68D40]">
+<section class="bg-saddle">
     <div class="max-w-4xl mx-auto px-4 py-14 md:py-16 text-center">
-        <h2 class="text-3xl font-bold text-white mb-4">Now Booking: Summer 2026 Fishing Trips</h2>
-        <p class="text-white/90 text-lg mb-8">
+        <h2 class="font-display font-bold text-cream text-3xl mb-4">Now Booking: Summer 2026 Fishing Trips</h2>
+        <p class="font-body italic text-cream/90 text-lg mb-8">
             Spots fill fast on the Missouri River. Reserve your dates today.
         </p>
-        <a href="/contact/" class="bg-[#1B4332] text-white px-8 py-3 rounded font-semibold text-lg hover:bg-[#143124] transition-colors inline-block">
+        <a href="/contact/" class="btn btn-primary btn-lg">
             Reserve Your Trip
         </a>
     </div>
