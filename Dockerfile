@@ -1,13 +1,13 @@
 # Build stage
 FROM golang:1.25-alpine AS builder
 
-RUN apk add --no-cache curl
+RUN apk add --no-cache curl libstdc++ libgcc
 
 WORKDIR /app
 
 # Download Tailwind CSS standalone CLI
-RUN curl -sLO https://github.com/tailwindlabs/tailwindcss/releases/latest/download/tailwindcss-linux-x64 \
-    && mv tailwindcss-linux-x64 tailwindcss \
+RUN curl -sLO https://github.com/tailwindlabs/tailwindcss/releases/latest/download/tailwindcss-linux-x64-musl \
+    && mv tailwindcss-linux-x64-musl tailwindcss \
     && chmod +x tailwindcss
 
 # Copy dependency files first for caching
