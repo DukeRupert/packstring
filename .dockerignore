@@ -1,0 +1,8 @@
+.git
+.claude
+.air.toml
+bin/
+tailwindcss
+node_modules/
+*.md
+docs/

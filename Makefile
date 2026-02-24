@@ -35,7 +35,9 @@ images:
 	@echo "Image optimization not yet configured."
 
 deploy:
-	@echo "Deploy not yet configured."
+	docker build -t packstring:latest .
+	@echo "Image built: packstring:latest"
+	@echo "Run with: docker run -p 8080:8080 packstring:latest"
 
 lighthouse:
 	@echo "Lighthouse CI not yet configured."

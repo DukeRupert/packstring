@@ -173,13 +173,13 @@ All content uses real trip info from Forrest's current site + placeholder/royalt
 
 #### 1.7 — MVP Polish & Deploy (2 hours)
 
-- [ ] Responsive pass: check every page at 375px, 768px, 1280px
-- [ ] Typography pass: consistent heading sizes, line heights, spacing
-- [ ] Color pass: establish palette (dark green / warm gold / cream — outdoorsy, premium feel)
-- [ ] Add favicon and Open Graph meta tags
-- [ ] Dockerfile for deployment
-- [ ] Deploy to demo.fireflysoftware.dev/outfitter/
-- [ ] Verify: site loads fast, looks professional, all links work
+- [x] Responsive pass: check every page at 375px, 768px, 1280px
+- [x] Typography pass: consistent heading sizes, line heights, spacing
+- [x] Color pass: establish palette (dark green / warm gold / cream — outdoorsy, premium feel)
+- [x] Add favicon and Open Graph meta tags
+- [x] Dockerfile for deployment
+- [x] Deploy to demo.fireflysoftware.dev/outfitter/
+- [x] Verify: site loads fast, looks professional, all links work
 
 **Git checkpoint: "release: mvp deployed"**
 
