@@ -32,7 +32,7 @@ setup:
 	fi
 
 images:
-	@echo "Image optimization not yet configured."
+	bash scripts/optimize-images.sh
 
 deploy:
 	docker build -t packstring:latest .

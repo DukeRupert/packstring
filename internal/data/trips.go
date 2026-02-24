@@ -6,6 +6,7 @@ type TripSection struct {
 	Slug          string   // used for ?trip= query param on /contact/
 	Tagline       string
 	Description   string
+	Image         string   // base path without size suffix, e.g. "/static/img/trips/jet-boat"
 	LocationLabel string   // "Waters", "Hunting Areas", "Destinations" — defaults to "Waters" in template
 	Locations     []string
 	Season        string // optional: e.g. "Sept 15 – Nov 25" for hunting
@@ -27,6 +28,7 @@ func GetFishingPageData() FishingPageData {
 				Title:   "Jet Boat Trips",
 				Slug:    "jet-boat",
 				Tagline: "Missouri River — Land of Giants",
+				Image:   "/static/img/trips/jet-boat",
 				Description: "The Missouri below Holter Dam runs cold and clear through canyon water most anglers never see from a road. " +
 					"Forrest covers miles of it in a heated jet boat, putting people on rainbow and brown trout that run 18 to 24 inches year-round. " +
 					"Multiple productive runs in a single day.",
@@ -44,6 +46,7 @@ func GetFishingPageData() FishingPageData {
 				Title:   "Drift Boat Trips",
 				Slug:    "drift-boat",
 				Tagline: "Missouri. Big Horn. Blackfoot.",
+				Image:   "/static/img/trips/drift-boat",
 				Description: "A drift boat puts you in the seams where big trout hold. " +
 					"Float the Missouri, the Big Horn, or the Blackfoot depending on season and conditions. " +
 					"Quieter than a jet boat. Closer to the water. The way fly fishing was meant to be done.",
@@ -61,6 +64,7 @@ func GetFishingPageData() FishingPageData {
 				Title:   "Lake Trips",
 				Slug:    "lake",
 				Tagline: "Canyon Ferry. Fort Peck. Holter.",
+				Image:   "/static/img/trips/lake",
 				Description: "Walleye, perch, and trout on Canyon Ferry, Fort Peck, and Holter. " +
 					"Forrest trolls and jigs aboard a boat rigged with sonar and downriggers. " +
 					"Good water for families. Kids catch fish here.",
@@ -78,6 +82,7 @@ func GetFishingPageData() FishingPageData {
 				Title:   "Wade Trips",
 				Slug:    "wade",
 				Tagline: "Boots in the Water, Rod in Hand",
+				Image:   "/static/img/trips/wade",
 				Description: "No boat, no motor. Just the river underfoot and wild trout in pocket water and riffles. " +
 					"Forrest hikes into productive stretches of the Gallatin, the Shields, and spring creeks that don't show up on most maps.",
 				Locations: []string{"Gallatin River", "Shields River", "Various spring creeks"},
@@ -94,6 +99,7 @@ func GetFishingPageData() FishingPageData {
 				Title:   "Specialty Trips",
 				Slug:    "specialty",
 				Tagline: "Beyond Trout",
+				Image:   "/static/img/trips/specialty",
 				Description: "Pike. Smallmouth bass. Chinook salmon. Lake trout. Winter ice fishing on Canyon Ferry. " +
 					"Forrest runs these trips when the trout water gets crowded. " +
 					"Different species, different methods, same guide who knows where they hold.",

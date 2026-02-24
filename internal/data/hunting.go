@@ -13,6 +13,7 @@ func GetHuntingPageData() HuntingPageData {
 				Title:         "Elk Hunts",
 				Slug:          "elk-hunting",
 				Tagline:       "Elkhorn Timber, Big Belt Country",
+				Image:         "/static/img/trips/elk-hunting",
 				Description: "Elk push through the Elkhorn and Big Belt mountains every fall on the same trails they've used for generations. " +
 					"Forrest hunts them on a mix of private ranch land and public ground, glassing ridgelines at first light and working the timber as the day warms. " +
 					"Five to seven days in steep country. Come prepared to hike.",
@@ -34,6 +35,7 @@ func GetHuntingPageData() HuntingPageData {
 				Title:         "Deer Hunts",
 				Slug:          "deer-hunting",
 				Tagline:       "Ranch Land and River Breaks",
+				Image:         "/static/img/trips/deer-hunting",
 				Description: "Whitetail and mule deer on private ranches outside Helena and in the coulees along the Missouri River breaks. " +
 					"Forrest scouts these properties through the summer, running trail cameras and tracking patterns before the season opens. " +
 					"Spot-and-stalk or stand hunting depending on terrain and conditions. Three to five days.",
@@ -55,6 +57,7 @@ func GetHuntingPageData() HuntingPageData {
 				Title:         "Bear Hunts",
 				Slug:          "bear-hunting",
 				Tagline:       "Spring and Fall in the Elkhorns",
+				Image:         "/static/img/trips/bear-hunting",
 				Description: "Black bear in the Elkhorn Mountains, the Big Belts, and Helena National Forest. " +
 					"Spring hunts run bait stations set weeks in advance. Fall hunts work spot-and-stalk through berry patches and creek bottoms. " +
 					"Forrest knows the drainages where bears den and feed. Five to seven days. Two seasons to hunt them.",
@@ -76,6 +79,7 @@ func GetHuntingPageData() HuntingPageData {
 				Title:         "Antelope Hunts",
 				Slug:          "antelope-hunting",
 				Tagline:       "Open Prairie, Long Glass",
+				Image:         "/static/img/trips/antelope-hunting",
 				Description: "Pronghorn on central Montana prairie and Broadwater County grassland. " +
 					"Flat country where you can see for miles and so can they. Forrest runs spot-and-stalk and blind hunts over water sources. " +
 					"Two to three days. The fastest game animal in North America does not give you many chances.",

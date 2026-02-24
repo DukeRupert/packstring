@@ -1,8 +1,18 @@
 {{define "trip-card"}}
 <div class="trip-card bg-cream rounded-[4px] flex flex-col">
-    <!-- Placeholder image area -->
-    <div class="aspect-[4/3] bg-sand-dk flex items-center justify-center">
-        <span class="font-ui text-stone text-sm">{{.Title}}</span>
+    <!-- Image area -->
+    <div class="aspect-[4/3] overflow-hidden">
+        {{if .Image}}
+        <img src="{{.Image}}-800w.webp"
+             srcset="{{.Image}}-400w.webp 400w, {{.Image}}-800w.webp 800w, {{.Image}}-1600w.webp 1600w"
+             sizes="(max-width: 768px) 100vw, 33vw"
+             alt="{{.Title}}" loading="lazy"
+             class="w-full h-full object-cover">
+        {{else}}
+        <div class="w-full h-full bg-sand-dk flex items-center justify-center">
+            <span class="font-ui text-stone text-sm">{{.Title}}</span>
+        </div>
+        {{end}}
     </div>
     <div class="p-6 flex flex-col flex-1">
         <h3 class="font-display text-lg font-bold text-ink leading-[1.2] mb-2">{{.Title}}</h3>

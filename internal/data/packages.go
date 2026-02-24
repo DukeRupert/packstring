@@ -13,6 +13,7 @@ func GetPackagesPageData() PackagesPageData {
 				Title:   "Montana Triple Header",
 				Slug:    "triple-header",
 				Tagline: "Fish. Hunt. Do It All in Five Days.",
+				Image:   "/static/img/trips/triple-header",
 				Description: "Two days on the Missouri chasing trout. One day in the Elkhorns after elk or deer. " +
 					"Two flex days to fish Canyon Ferry, wade a spring creek, or just sit on the porch and do nothing. " +
 					"Forrest builds the itinerary around the season, the conditions, and what you came to do. " +
@@ -35,6 +36,7 @@ func GetPackagesPageData() PackagesPageData {
 				Title:   "Montana 6-Pack",
 				Slug:    "six-pack",
 				Tagline: "Seven Days. Five Waters. One State That Has It All.",
+				Image:   "/static/img/trips/six-pack",
 				Description: "Three days fishing the Missouri, Fort Peck, and Canyon Ferry. " +
 					"Two days hunting the Elkhorns and Big Belts. " +
 					"Two days to pick your own — a second run at the river, a wade trip on the Gallatin, or a morning in a duck blind. " +

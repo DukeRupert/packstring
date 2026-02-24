@@ -1,8 +1,18 @@
 {{define "trip-section"}}
 <div class="trip-grid grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
-    <!-- Placeholder image -->
-    <div class="aspect-[4/3] rounded-[4px] bg-sand-dk flex items-center justify-center">
-        <span class="font-ui text-stone">{{.Title}}</span>
+    <!-- Image -->
+    <div class="aspect-[4/3] rounded-[4px] overflow-hidden">
+        {{if .Image}}
+        <img src="{{.Image}}-800w.webp"
+             srcset="{{.Image}}-400w.webp 400w, {{.Image}}-800w.webp 800w, {{.Image}}-1600w.webp 1600w"
+             sizes="(max-width: 768px) 100vw, 50vw"
+             alt="{{.Title}}" loading="lazy"
+             class="w-full h-full object-cover">
+        {{else}}
+        <div class="w-full h-full bg-sand-dk flex items-center justify-center">
+            <span class="font-ui text-stone">{{.Title}}</span>
+        </div>
+        {{end}}
     </div>
 
     <!-- Details -->

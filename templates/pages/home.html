@@ -1,9 +1,21 @@
 {{define "title"}}MT Hunt & Fish Outfitters — Helena, Montana Fishing & Hunting Guide{{end}}
 
+{{define "head"}}
+<link rel="preload" as="image" type="image/webp"
+      imagesrcset="/static/img/hero/hero-montana-400w.webp 400w, /static/img/hero/hero-montana-800w.webp 800w, /static/img/hero/hero-montana-1600w.webp 1600w"
+      imagesizes="100vw">
+{{end}}
+
 {{define "content"}}
 
 <!-- Hero -->
 <section class="relative bg-timber overflow-hidden">
+    <img src="/static/img/hero/hero-montana-1600w.webp"
+         srcset="/static/img/hero/hero-montana-400w.webp 400w, /static/img/hero/hero-montana-800w.webp 800w, /static/img/hero/hero-montana-1600w.webp 1600w"
+         sizes="100vw"
+         alt="Montana river and mountains at golden hour"
+         class="absolute inset-0 w-full h-full object-cover">
+    <div class="absolute inset-0 bg-timber/60"></div>
     <div class="max-w-[1100px] mx-auto px-4 py-24 md:py-32 text-center relative z-10">
         <h1 class="font-display font-[800] text-[clamp(36px,5vw,64px)] leading-[1.05] text-cream mb-6">Montana Hunting &amp; Fishing Outfitters</h1>
         <p class="font-body text-cream/80 text-lg md:text-xl max-w-2xl mx-auto mb-10">
