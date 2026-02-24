@@ -1,0 +1,195 @@
+{{define "title"}}Photo Gallery — MT Hunt & Fish Outfitters{{end}}
+
+{{define "head"}}
+<style>
+    .lightbox-backdrop {
+        background-color: rgba(26, 20, 16, 0.95);
+    }
+</style>
+{{end}}
+
+{{define "content"}}
+
+<!-- Page Hero -->
+<section class="relative bg-timber overflow-hidden">
+    <div class="max-w-[1100px] mx-auto px-4 py-16 md:py-20 text-center relative z-10">
+        <h1 class="font-display font-[800] text-[clamp(36px,5vw,64px)] leading-[1.05] text-cream mb-4">Gallery</h1>
+        <p class="font-body text-cream/80 text-lg max-w-2xl mx-auto">
+            On the water. In the field. Around the fire. A few moments from recent seasons.
+        </p>
+    </div>
+</section>
+
+<!-- Gallery -->
+<section class="max-w-[1100px] mx-auto px-4 py-16 md:py-20" x-data="galleryApp()">
+
+    <!-- Filter Tabs -->
+    <div class="flex flex-wrap gap-2 mb-10 justify-center">
+        <button
+            @click="filter = 'all'"
+            :class="filter === 'all'
+                ? 'bg-forest text-white border-forest'
+                : 'bg-transparent text-ink-faded border-sand-dk hover:border-ink-faded'"
+            class="btn btn-sm border-2 transition-colors">
+            All
+        </button>
+        {{range .Categories}}
+        <button
+            @click="filter = '{{.Slug}}'"
+            :class="filter === '{{.Slug}}'
+                ? 'bg-forest text-white border-forest'
+                : 'bg-transparent text-ink-faded border-sand-dk hover:border-ink-faded'"
+            class="btn btn-sm border-2 transition-colors">
+            {{.Name}}
+        </button>
+        {{end}}
+    </div>
+
+    <!-- Photo Grid -->
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        {{range $i, $img := .Images}}
+        <div
+            x-show="filter === 'all' || filter === '{{$img.Category}}'"
+            x-transition:enter="transition ease-out duration-200"
+            x-transition:enter-start="opacity-0 scale-95"
+            x-transition:enter-end="opacity-100 scale-100"
+            class="group cursor-pointer"
+            @click="openLightbox({{$img.ID}})">
+            {{if $img.Src}}
+            <div class="aspect-[4/3] rounded-[4px] overflow-hidden">
+                <img
+                    src="{{$img.Thumb}}"
+                    alt="{{$img.Alt}}"
+                    class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    loading="lazy">
+            </div>
+            {{else}}
+            <div class="aspect-[4/3] rounded-[4px] bg-sand-dk flex flex-col items-center justify-center p-4 text-center transition-colors duration-200 group-hover:bg-timber-edge">
+                <span class="font-ui text-[11px] uppercase tracking-[0.25em] text-stone mb-2">{{$img.Category}}</span>
+                <span class="font-body text-[13px] text-ink-faded leading-snug">{{$img.Alt}}</span>
+            </div>
+            {{end}}
+        </div>
+        {{end}}
+    </div>
+
+    <!-- Lightbox -->
+    <div
+        x-show="lightboxOpen"
+        x-cloak
+        x-transition:enter="transition ease-out duration-200"
+        x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100"
+        x-transition:leave="transition ease-in duration-150"
+        x-transition:leave-start="opacity-100"
+        x-transition:leave-end="opacity-0"
+        @keydown.escape.window="closeLightbox()"
+        @keydown.arrow-left.window="prev()"
+        @keydown.arrow-right.window="next()"
+        class="fixed inset-0 z-50 lightbox-backdrop flex items-center justify-center p-4">
+
+        <!-- Close -->
+        <button @click="closeLightbox()" class="absolute top-4 right-4 text-cream/70 hover:text-cream transition-colors z-10">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+        </button>
+
+        <!-- Prev -->
+        <button @click="prev()" class="absolute left-4 top-1/2 -translate-y-1/2 text-cream/50 hover:text-cream transition-colors z-10">
+            <svg class="w-10 h-10" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
+            </svg>
+        </button>
+
+        <!-- Next -->
+        <button @click="next()" class="absolute right-4 top-1/2 -translate-y-1/2 text-cream/50 hover:text-cream transition-colors z-10">
+            <svg class="w-10 h-10" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+            </svg>
+        </button>
+
+        <!-- Content -->
+        <div class="max-w-4xl w-full" @click.outside="closeLightbox()">
+            <template x-if="currentImage()">
+                <div>
+                    <template x-if="currentImage().src">
+                        <img :src="currentImage().src" :alt="currentImage().alt" class="w-full rounded-[4px]">
+                    </template>
+                    <template x-if="!currentImage().src">
+                        <div class="aspect-[16/10] rounded-[4px] bg-timber-lt flex flex-col items-center justify-center p-8 text-center">
+                            <span class="font-ui text-[11px] uppercase tracking-[0.25em] text-stone mb-3" x-text="currentImage().category"></span>
+                            <span class="font-body text-cream/80 text-lg" x-text="currentImage().alt"></span>
+                        </div>
+                    </template>
+                    <p class="text-cream/60 font-body text-sm text-center mt-4" x-text="currentImage().alt"></p>
+                </div>
+            </template>
+        </div>
+    </div>
+</section>
+
+<!-- Bottom CTA -->
+<section class="section--dark">
+    <div class="golden-glow"></div>
+    <div class="max-w-3xl mx-auto px-4 py-14 md:py-16 text-center relative z-10">
+        <h2 class="font-display font-bold text-cream text-2xl mb-4">Want to Be in the Next Photo?</h2>
+        <p class="font-body text-sand-dk mb-6">
+            Book a trip with Forrest and bring home a story worth telling.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="tel:+14064595352" class="btn btn-primary btn-lg">
+                Call (406) 459-5352
+            </a>
+            <a href="/contact/" class="btn btn-outline-light btn-lg">
+                Book a Trip
+            </a>
+        </div>
+    </div>
+</section>
+
+<script>
+function galleryApp() {
+    return {
+        filter: 'all',
+        lightboxOpen: false,
+        currentIndex: 0,
+        images: [
+            {{range .Images}}{id: {{.ID}}, src: '{{.Src}}', thumb: '{{.Thumb}}', alt: '{{.Alt}}', category: '{{.Category}}'},
+            {{end}}
+        ],
+        filteredImages() {
+            if (this.filter === 'all') return this.images;
+            return this.images.filter(img => img.category === this.filter);
+        },
+        currentImage() {
+            const filtered = this.filteredImages();
+            return filtered[this.currentIndex] || null;
+        },
+        openLightbox(id) {
+            const filtered = this.filteredImages();
+            const idx = filtered.findIndex(img => img.id === id);
+            if (idx === -1) return;
+            this.currentIndex = idx;
+            this.lightboxOpen = true;
+            document.body.style.overflow = 'hidden';
+        },
+        closeLightbox() {
+            this.lightboxOpen = false;
+            document.body.style.overflow = '';
+        },
+        next() {
+            if (!this.lightboxOpen) return;
+            const filtered = this.filteredImages();
+            this.currentIndex = (this.currentIndex + 1) % filtered.length;
+        },
+        prev() {
+            if (!this.lightboxOpen) return;
+            const filtered = this.filteredImages();
+            this.currentIndex = (this.currentIndex - 1 + filtered.length) % filtered.length;
+        }
+    };
+}
+</script>
+
+{{end}}

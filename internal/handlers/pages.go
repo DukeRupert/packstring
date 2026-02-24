@@ -50,6 +50,13 @@ func (p *Pages) PackagesPage(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func (p *Pages) GalleryPage(w http.ResponseWriter, r *http.Request) {
+	pageData := data.GetGalleryPageData()
+	if err := p.templates["gallery"].ExecuteTemplate(w, "base.html", pageData); err != nil {
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+	}
+}
+
 func (p *Pages) ContactPage(w http.ResponseWriter, r *http.Request) {
 	if err := p.templates["contact"].ExecuteTemplate(w, "base.html", nil); err != nil {
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)

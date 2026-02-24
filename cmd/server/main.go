@@ -26,6 +26,7 @@ func main() {
 		"fishing":  mustParseTemplate("fishing.html"),
 		"hunting":  mustParseTemplate("hunting.html"),
 		"packages": mustParseTemplate("packages.html"),
+		"gallery":  mustParseTemplate("gallery.html"),
 		"contact":  mustParseTemplate("contact.html"),
 	}
 
@@ -42,6 +43,7 @@ func main() {
 	mux.HandleFunc("GET /trips/fishing/{$}", pages.FishingPage)
 	mux.HandleFunc("GET /trips/hunting/{$}", pages.HuntingPage)
 	mux.HandleFunc("GET /trips/packages/{$}", pages.PackagesPage)
+	mux.HandleFunc("GET /gallery/{$}", pages.GalleryPage)
 	mux.HandleFunc("GET /contact/{$}", pages.ContactPage)
 
 	// Contact form
