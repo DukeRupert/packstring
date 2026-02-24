@@ -3,6 +3,8 @@ package handlers
 import (
 	"html/template"
 	"net/http"
+
+	"github.com/firefly/packstring/internal/data"
 )
 
 type Pages struct {
@@ -14,7 +16,8 @@ func NewPages(tmpl *template.Template) *Pages {
 }
 
 func (p *Pages) HomePage(w http.ResponseWriter, r *http.Request) {
-	if err := p.tmpl.ExecuteTemplate(w, "base.html", nil); err != nil {
+	pageData := data.GetHomePageData()
+	if err := p.tmpl.ExecuteTemplate(w, "base.html", pageData); err != nil {
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 	}
 }

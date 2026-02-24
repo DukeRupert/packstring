@@ -125,12 +125,12 @@ All content uses real trip info from Forrest's current site + placeholder/royalt
 
 #### 1.3 — Homepage (4 hours)
 
-- [ ] Hero section: full-width background image, headline, subheadline, 2 CTA buttons
-- [ ] Quick intro: 2-3 sentence summary, license credentials
-- [ ] Trip cards section: 3 cards (Fishing, Hunting, Packages) with placeholder images
-- [ ] Testimonials section: 2-3 testimonials in a simple grid or stacked layout
-- [ ] Seasonal callout banner: "Now Booking: Summer 2026" with CTA
-- [ ] Verify: page looks polished on mobile and desktop, hero image loads fast
+- [x] Hero section: full-width background image, headline, subheadline, 2 CTA buttons
+- [x] Quick intro: 2-3 sentence summary, license credentials
+- [x] Trip cards section: 3 cards (Fishing, Hunting, Packages) with placeholder images
+- [x] Testimonials section: 2-3 testimonials in a simple grid or stacked layout
+- [x] Seasonal callout banner: "Now Booking: Summer 2026" with CTA
+- [x] Verify: page looks polished on mobile and desktop, hero image loads fast
 
 **Git checkpoint: "pages: homepage complete"**
 
