@@ -20,12 +20,9 @@
 
 <!-- Quick Intro -->
 <section class="max-w-3xl mx-auto px-4 py-16 md:py-20 text-center">
-    <h2 class="font-display font-[800] text-[clamp(26px,3.5vw,42px)] leading-[1.1] text-ink mb-6">Your Guide in Big Sky Country</h2>
+    <h2 class="font-display font-[800] text-[clamp(26px,3.5vw,42px)] leading-[1.1] text-ink mb-6">25 Years on Montana Water</h2>
     <p class="font-body text-[15px] leading-[1.7] text-ink-mid mb-4">
-        Forrest Fawthrop has spent over 25 years guiding anglers and hunters through some of Montana's
-        finest waters and wildest terrain. Based in Helena, MT Hunt &amp; Fish Outfitters offers
-        personalized trips on the Missouri River, nearby lakes, and private ranch land throughout
-        west-central Montana.
+        Forrest Fawthrop has guided anglers and hunters out of Helena for over 25 years. He runs jet boats and drift boats on the Missouri. He fishes Canyon Ferry, Holter, and Fort Peck. He hunts elk and deer in the Elkhorns and the Big Belts. One guide. Every trip.
     </p>
     <p class="font-mono text-[11px] tracking-[0.08em] text-stone">
         Licensed Montana Outfitter #20194 &middot; USCG Captain #3427176
@@ -35,7 +32,7 @@
 <!-- Trip Cards -->
 <section class="bg-sand-lt py-16 md:py-20">
     <div class="max-w-[1100px] mx-auto px-4">
-        <h2 class="font-display font-[800] text-[clamp(26px,3.5vw,42px)] leading-[1.1] text-ink text-center mb-12">Our Trips</h2>
+        <h2 class="font-display font-[800] text-[clamp(26px,3.5vw,42px)] leading-[1.1] text-ink text-center mb-12">Guided Trips</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-[2px] bg-sand-dk rounded-[4px] overflow-hidden">
             {{range .TripCards}}
                 {{template "trip-card" .}}
@@ -48,7 +45,7 @@
 <section class="section--dark">
     <div class="golden-glow"></div>
     <div class="max-w-[1100px] mx-auto px-4 py-16 md:py-20 relative z-10">
-        <h2 class="font-display font-[800] text-[clamp(26px,3.5vw,42px)] leading-[1.1] text-cream text-center mb-12">What Our Clients Say</h2>
+        <h2 class="font-display font-[800] text-[clamp(26px,3.5vw,42px)] leading-[1.1] text-cream text-center mb-12">What Anglers Say</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-[2px] bg-timber rounded-[4px] overflow-hidden">
             {{range .Testimonials}}
             <blockquote class="bg-timber-lt rounded-[4px] p-6 flex flex-col">
@@ -68,7 +65,7 @@
     <div class="max-w-4xl mx-auto px-4 py-14 md:py-16 text-center">
         <h2 class="font-display font-bold text-cream text-3xl mb-4">Now Booking: Summer 2026 Fishing Trips</h2>
         <p class="font-body italic text-cream/90 text-lg mb-8">
-            Spots fill fast on the Missouri River. Reserve your dates today.
+            Weekends fill first on the Missouri. Reserve your dates.
         </p>
         <a href="/contact/" class="btn btn-primary btn-lg">
             Reserve Your Trip

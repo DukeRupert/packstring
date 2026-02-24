@@ -25,9 +25,9 @@ func GetFishingPageData() FishingPageData {
 				Title:   "Jet Boat Trips",
 				Slug:    "jet-boat",
 				Tagline: "Missouri River — Land of Giants",
-				Description: "Cover miles of prime water on the Missouri River below Holter Dam in our heated jet boat. " +
-					"This stretch is famous for producing trophy rainbow and brown trout year-round. " +
-					"Perfect for anglers who want to hit multiple productive runs in a single day.",
+				Description: "The Missouri below Holter Dam runs cold and clear through canyon water most anglers never see from a road. " +
+					"Forrest covers miles of it in a heated jet boat, putting people on rainbow and brown trout that run 18 to 24 inches year-round. " +
+					"Multiple productive runs in a single day.",
 				Waters: []string{"Missouri River (Craig to Cascade)"},
 				Includes: []string{
 					"All flies and terminal tackle",
@@ -36,15 +36,15 @@ func GetFishingPageData() FishingPageData {
 					"Drinks and snacks",
 				},
 				Duration: "Full Day (8 hrs) or Half Day (4 hrs)",
-				Price:    "From $500/person",
+				Price:    "$500/person",
 			},
 			{
 				Title:   "Drift Boat Trips",
 				Slug:    "drift-boat",
-				Tagline: "Classic Fly Fishing at Its Best",
-				Description: "Float through scenic canyons and wade productive riffles from a traditional drift boat. " +
-					"A quieter, more intimate experience that puts you right in the seams where big fish hold. " +
-					"We fish the Missouri, Big Horn, and Blackfoot Rivers depending on season and conditions.",
+				Tagline: "Missouri. Big Horn. Blackfoot.",
+				Description: "A drift boat puts you in the seams where big trout hold. " +
+					"Float the Missouri, the Big Horn, or the Blackfoot depending on season and conditions. " +
+					"Quieter than a jet boat. Closer to the water. The way fly fishing was meant to be done.",
 				Waters: []string{"Missouri River", "Big Horn River", "Blackfoot River"},
 				Includes: []string{
 					"All flies and terminal tackle",
@@ -53,15 +53,15 @@ func GetFishingPageData() FishingPageData {
 					"Drinks and snacks",
 				},
 				Duration: "Full Day (8 hrs) or Half Day (4 hrs)",
-				Price:    "From $500/person",
+				Price:    "$500/person",
 			},
 			{
 				Title:   "Lake Trips",
 				Slug:    "lake",
-				Tagline: "Big Water, Big Fish",
-				Description: "Target walleye, perch, and trout on Montana's premier reservoirs. " +
-					"We troll and jig aboard a fully equipped boat with electronics to find the fish. " +
-					"Great for families and groups looking for a fun, productive day on the water.",
+				Tagline: "Canyon Ferry. Fort Peck. Holter.",
+				Description: "Walleye, perch, and trout on Canyon Ferry, Fort Peck, and Holter. " +
+					"Forrest trolls and jigs aboard a boat rigged with sonar and downriggers. " +
+					"Good water for families. Kids catch fish here.",
 				Waters: []string{"Canyon Ferry Reservoir", "Fort Peck Lake", "Holter Lake"},
 				Includes: []string{
 					"All tackle and bait",
@@ -70,15 +70,14 @@ func GetFishingPageData() FishingPageData {
 					"Fish cleaning and bagging",
 				},
 				Duration: "Full Day (8 hrs) or Half Day (4 hrs)",
-				Price:    "From $450/person",
+				Price:    "$450/person",
 			},
 			{
 				Title:   "Wade Trips",
 				Slug:    "wade",
 				Tagline: "Boots in the Water, Rod in Hand",
-				Description: "For the angler who wants to feel the river underfoot. " +
-					"We hike into productive stretches of smaller rivers and creeks, targeting wild trout in pocket water and riffles. " +
-					"An ideal choice for fly fishing purists and anyone who loves exploring on foot.",
+				Description: "No boat, no motor. Just the river underfoot and wild trout in pocket water and riffles. " +
+					"Forrest hikes into productive stretches of the Gallatin, the Shields, and spring creeks that don't show up on most maps.",
 				Waters: []string{"Gallatin River", "Shields River", "Various spring creeks"},
 				Includes: []string{
 					"All flies and terminal tackle",
@@ -87,15 +86,15 @@ func GetFishingPageData() FishingPageData {
 					"Drinks and snacks",
 				},
 				Duration: "Full Day (8 hrs) or Half Day (4 hrs)",
-				Price:    "From $400/person",
+				Price:    "$400/person",
 			},
 			{
 				Title:   "Specialty Trips",
 				Slug:    "specialty",
-				Tagline: "Beyond Trout — Something Different",
-				Description: "Looking for something off the beaten path? We offer guided trips for pike, smallmouth bass, " +
-					"Chinook salmon, lake trout, and winter ice fishing. " +
-					"These trips are tailored to adventurous anglers who want a unique Montana experience.",
+				Tagline: "Beyond Trout",
+				Description: "Pike. Smallmouth bass. Chinook salmon. Lake trout. Winter ice fishing on Canyon Ferry. " +
+					"Forrest runs these trips when the trout water gets crowded. " +
+					"Different species, different methods, same guide who knows where they hold.",
 				Waters: []string{"Missouri River", "Fort Peck Lake", "Canyon Ferry Reservoir", "Various rivers"},
 				Includes: []string{
 					"All tackle and bait",
@@ -104,7 +103,7 @@ func GetFishingPageData() FishingPageData {
 					"Ice fishing gear and shelter (winter trips)",
 				},
 				Duration: "Full Day (8 hrs)",
-				Price:    "From $450/person",
+				Price:    "$450/person",
 			},
 		},
 	}
