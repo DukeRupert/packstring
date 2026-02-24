@@ -1,0 +1,113 @@
+{{define "contact-form"}}
+<form
+    x-data="contactForm()"
+    hx-post="/contact"
+    hx-target="#contact-form-wrapper"
+    hx-swap="innerHTML"
+    class="space-y-6"
+>
+    <!-- Error messages (populated via OOB swap on validation failure) -->
+    <div id="form-errors"></div>
+
+    <!-- Honeypot — hidden from real users, bots fill it in -->
+    <div class="absolute -left-[9999px]" aria-hidden="true">
+        <label for="website">Website</label>
+        <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+    </div>
+
+    <!-- Name + Email -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div>
+            <label for="name" class="font-ui text-[11px] uppercase tracking-[0.35em] text-ink mb-2 block">Name <span class="text-copper">*</span></label>
+            <input type="text" id="name" name="name" required
+                class="w-full bg-cream border border-sand-dk rounded-[4px] px-4 py-3 font-body text-ink text-sm focus:outline-none focus:border-copper focus:ring-1 focus:ring-copper transition-colors">
+        </div>
+        <div>
+            <label for="email" class="font-ui text-[11px] uppercase tracking-[0.35em] text-ink mb-2 block">Email <span class="text-copper">*</span></label>
+            <input type="email" id="email" name="email" required
+                class="w-full bg-cream border border-sand-dk rounded-[4px] px-4 py-3 font-body text-ink text-sm focus:outline-none focus:border-copper focus:ring-1 focus:ring-copper transition-colors">
+        </div>
+    </div>
+
+    <!-- Phone -->
+    <div>
+        <label for="phone" class="font-ui text-[11px] uppercase tracking-[0.35em] text-ink mb-2 block">Phone</label>
+        <input type="tel" id="phone" name="phone"
+            class="w-full bg-cream border border-sand-dk rounded-[4px] px-4 py-3 font-body text-ink text-sm focus:outline-none focus:border-copper focus:ring-1 focus:ring-copper transition-colors">
+    </div>
+
+    <!-- Trip Interest -->
+    <div>
+        <label for="trip" class="font-ui text-[11px] uppercase tracking-[0.35em] text-ink mb-2 block">Trip Interest</label>
+        <select id="trip" name="trip" x-model="trip"
+            class="w-full bg-cream border border-sand-dk rounded-[4px] px-4 py-3 font-body text-ink text-sm focus:outline-none focus:border-copper focus:ring-1 focus:ring-copper transition-colors appearance-none">
+            <option value="">— Select a trip —</option>
+            <optgroup label="Fishing">
+                <option value="jet-boat">Jet Boat Trips</option>
+                <option value="drift-boat">Drift Boat Trips</option>
+                <option value="lake">Lake Trips</option>
+                <option value="wade">Wade Trips</option>
+                <option value="specialty">Specialty Trips</option>
+            </optgroup>
+            <optgroup label="Hunting">
+                <option value="elk-hunting">Elk Hunts</option>
+                <option value="deer-hunting">Deer Hunts</option>
+                <option value="bear-hunting">Bear Hunts</option>
+                <option value="antelope-hunting">Antelope Hunts</option>
+            </optgroup>
+            <optgroup label="Packages">
+                <option value="triple-header">Montana Triple Header</option>
+                <option value="six-pack">Montana 6-Pack</option>
+            </optgroup>
+        </select>
+    </div>
+
+    <!-- Dates + Party Size -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div>
+            <label for="dates" class="font-ui text-[11px] uppercase tracking-[0.35em] text-ink mb-2 block">Preferred Dates</label>
+            <input type="text" id="dates" name="dates" placeholder="e.g. June 15–18, 2026"
+                class="w-full bg-cream border border-sand-dk rounded-[4px] px-4 py-3 font-body text-ink text-sm focus:outline-none focus:border-copper focus:ring-1 focus:ring-copper transition-colors placeholder:text-stone">
+        </div>
+        <div>
+            <label for="party_size" class="font-ui text-[11px] uppercase tracking-[0.35em] text-ink mb-2 block">Party Size</label>
+            <input type="number" id="party_size" name="party_size" min="1" max="20" placeholder="Number of guests"
+                class="w-full bg-cream border border-sand-dk rounded-[4px] px-4 py-3 font-body text-ink text-sm focus:outline-none focus:border-copper focus:ring-1 focus:ring-copper transition-colors placeholder:text-stone">
+        </div>
+    </div>
+
+    <!-- Experience Level -->
+    <div>
+        <label for="experience" class="font-ui text-[11px] uppercase tracking-[0.35em] text-ink mb-2 block">Experience Level</label>
+        <select id="experience" name="experience"
+            class="w-full bg-cream border border-sand-dk rounded-[4px] px-4 py-3 font-body text-ink text-sm focus:outline-none focus:border-copper focus:ring-1 focus:ring-copper transition-colors appearance-none">
+            <option value="">— Select —</option>
+            <option value="beginner">Beginner — First time or just a few trips</option>
+            <option value="intermediate">Intermediate — Comfortable but still learning</option>
+            <option value="experienced">Experienced — Years of fishing or hunting</option>
+        </select>
+    </div>
+
+    <!-- Message -->
+    <div>
+        <label for="message" class="font-ui text-[11px] uppercase tracking-[0.35em] text-ink mb-2 block">Message</label>
+        <textarea id="message" name="message" rows="5" placeholder="Anything else Forrest should know — gear questions, accessibility needs, what you're hoping to catch or hunt."
+            class="w-full bg-cream border border-sand-dk rounded-[4px] px-4 py-3 font-body text-ink text-sm focus:outline-none focus:border-copper focus:ring-1 focus:ring-copper transition-colors placeholder:text-stone resize-y"></textarea>
+    </div>
+
+    <!-- Submit -->
+    <div>
+        <button type="submit" class="btn btn-primary btn-lg w-full sm:w-auto">
+            Send Inquiry
+        </button>
+    </div>
+</form>
+
+<script>
+function contactForm() {
+    return {
+        trip: new URLSearchParams(window.location.search).get('trip') || ''
+    }
+}
+</script>
+{{end}}

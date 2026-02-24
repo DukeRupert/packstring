@@ -49,3 +49,9 @@ func (p *Pages) PackagesPage(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 	}
 }
+
+func (p *Pages) ContactPage(w http.ResponseWriter, r *http.Request) {
+	if err := p.templates["contact"].ExecuteTemplate(w, "base.html", nil); err != nil {
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+	}
+}

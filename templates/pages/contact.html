@@ -1,0 +1,58 @@
+{{define "content"}}
+
+<!-- Page Hero -->
+<section class="relative bg-timber overflow-hidden">
+    <div class="max-w-[1100px] mx-auto px-4 py-16 md:py-20 text-center relative z-10">
+        <h1 class="font-display font-[800] text-[clamp(36px,5vw,64px)] leading-[1.05] text-cream mb-4">Book a Trip</h1>
+        <p class="font-body text-cream/80 text-lg max-w-2xl mx-auto">
+            Tell Forrest what you're after. He'll get back to you within 24 hours — usually faster.
+        </p>
+    </div>
+</section>
+
+<!-- Form + Contact Info -->
+<div class="max-w-[1100px] mx-auto px-4 py-16 md:py-20">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16">
+
+        <!-- Form Column -->
+        <div class="lg:col-span-2">
+            <div id="contact-form-wrapper">
+                {{template "contact-form" .}}
+            </div>
+        </div>
+
+        <!-- Contact Info Sidebar -->
+        <div>
+            <div class="sticky top-8 space-y-8">
+                <div>
+                    <h3 class="font-ui text-[11px] uppercase tracking-[0.35em] text-ink mb-3">Call Direct</h3>
+                    <a href="tel:+14064595352" class="font-display text-2xl font-bold text-copper hover:text-copper-lt transition-colors block">
+                        (406) 459-5352
+                    </a>
+                </div>
+
+                <div>
+                    <h3 class="font-ui text-[11px] uppercase tracking-[0.35em] text-ink mb-3">Address</h3>
+                    <p class="font-body text-ink-mid text-sm">610 Jeanne Rd</p>
+                    <p class="font-body text-ink-mid text-sm">Helena, MT 59602</p>
+                </div>
+
+                <div>
+                    <h3 class="font-ui text-[11px] uppercase tracking-[0.35em] text-ink mb-3">Response Time</h3>
+                    <p class="font-body text-ink-mid text-sm">
+                        Forrest responds within 24 hours — usually faster. If you're calling during fishing or hunting season, mornings before 7 AM or evenings after 6 PM work best.
+                    </p>
+                </div>
+
+                <div>
+                    <h3 class="font-ui text-[11px] uppercase tracking-[0.35em] text-ink mb-3">Licensed & Insured</h3>
+                    <p class="font-mono text-[11px] tracking-[0.08em] text-ink-faded">Montana Outfitter License #20194</p>
+                    <p class="font-mono text-[11px] tracking-[0.08em] text-ink-faded">USCG Captain License #3427176</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{{end}}

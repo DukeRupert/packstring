@@ -26,6 +26,7 @@ func main() {
 		"fishing":  mustParseTemplate("fishing.html"),
 		"hunting":  mustParseTemplate("hunting.html"),
 		"packages": mustParseTemplate("packages.html"),
+		"contact":  mustParseTemplate("contact.html"),
 	}
 
 	pages := handlers.NewPages(templates)
@@ -41,9 +42,10 @@ func main() {
 	mux.HandleFunc("GET /trips/fishing/{$}", pages.FishingPage)
 	mux.HandleFunc("GET /trips/hunting/{$}", pages.HuntingPage)
 	mux.HandleFunc("GET /trips/packages/{$}", pages.PackagesPage)
+	mux.HandleFunc("GET /contact/{$}", pages.ContactPage)
 
 	// Contact form
-	contact := handlers.NewContact()
+	contact := handlers.NewContact(templates)
 	mux.HandleFunc("POST /contact", contact.Submit)
 
 	log.Println("Starting server on :8080")

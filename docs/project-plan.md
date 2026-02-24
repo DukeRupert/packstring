@@ -151,23 +151,23 @@ All content uses real trip info from Forrest's current site + placeholder/royalt
 
 #### 1.5 — Hunting + Packages Pages (2 hours)
 
-- [ ] Hunting page (`/trips/hunting/`): sectioned by game type (elk, deer, bear, antelope)
-- [ ] Each section: placeholder photo, season dates, pricing, what's included, CTA
-- [ ] Packages page (`/trips/packages/`): Triple Header and 6-Pack packages
-- [ ] Each package: full description, itinerary summary, pricing, CTA
-- [ ] Verify: consistent styling with fishing page
+- [x] Hunting page (`/trips/hunting/`): sectioned by game type (elk, deer, bear, antelope)
+- [x] Each section: placeholder photo, season dates, pricing, what's included, CTA
+- [x] Packages page (`/trips/packages/`): Triple Header and 6-Pack packages
+- [x] Each package: full description, itinerary summary, pricing, CTA
+- [x] Verify: consistent styling with fishing page
 
 **Git checkpoint: "pages: hunting and packages"**
 
 #### 1.6 — Contact Page + Form (3 hours)
 
-- [ ] Build inquiry form (name, email, phone, trip interest dropdown, dates, party size, experience level, message)
-- [ ] Trip interest dropdown pre-selects based on `?trip=` query param (Alpine.js reads URL)
-- [ ] htmx POST to `/contact` → returns success message partial (swaps form content)
-- [ ] Go handler: validates required fields, returns success HTML or error HTML
-- [ ] Below form: phone number (large), email, address, response time note
-- [ ] Honeypot field for spam prevention
-- [ ] Verify: form submits cleanly, validation works, success state displays
+- [x] Build inquiry form (name, email, phone, trip interest dropdown, dates, party size, experience level, message)
+- [x] Trip interest dropdown pre-selects based on `?trip=` query param (Alpine.js reads URL)
+- [x] htmx POST to `/contact` → returns success message partial (swaps form content)
+- [x] Go handler: validates required fields, returns success HTML or error HTML
+- [x] Below form: phone number (large), email, address, response time note
+- [x] Honeypot field for spam prevention
+- [x] Verify: form submits cleanly, validation works, success state displays
 
 **Git checkpoint: "pages: contact form with htmx submission"**
 
