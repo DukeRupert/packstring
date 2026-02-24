@@ -1,0 +1,51 @@
+{{define "head"}}
+<style>
+    @media (min-width: 768px) {
+        .trip-sections > section:nth-child(even) .trip-grid > :first-child {
+            order: 2;
+        }
+    }
+</style>
+{{end}}
+
+{{define "content"}}
+
+<!-- Page Hero -->
+<section class="relative bg-timber overflow-hidden">
+    <div class="max-w-[1100px] mx-auto px-4 py-16 md:py-20 text-center relative z-10">
+        <h1 class="font-display font-[800] text-[clamp(36px,5vw,64px)] leading-[1.05] text-cream mb-4">Multi-Day Packages</h1>
+        <p class="font-body text-cream/80 text-lg max-w-2xl mx-auto">
+            More days on the water and in the field. One guide who knows all of it. Forrest builds these trips around you.
+        </p>
+    </div>
+</section>
+
+<!-- Trip Sections -->
+<div class="trip-sections max-w-[1100px] mx-auto px-4 py-16 md:py-20 space-y-16 md:space-y-24">
+    {{range .Packages}}
+    <section class="reveal">
+        {{template "trip-section" .}}
+    </section>
+    {{end}}
+</div>
+
+<!-- Bottom CTA -->
+<section class="section--dark">
+    <div class="golden-glow"></div>
+    <div class="max-w-3xl mx-auto px-4 py-14 md:py-16 text-center relative z-10">
+        <h2 class="font-display font-bold text-cream text-2xl mb-4">Build Your Trip</h2>
+        <p class="font-body text-sand-dk mb-6">
+            No two packages look the same. Call Forrest with your dates and your wish list. He'll put the itinerary together and send you a quote within 48 hours.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="tel:+14064595352" class="btn btn-primary btn-lg">
+                Call (406) 459-5352
+            </a>
+            <a href="/contact/" class="btn btn-outline-light btn-lg">
+                Send a Message
+            </a>
+        </div>
+    </div>
+</section>
+
+{{end}}

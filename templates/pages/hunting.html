@@ -1,0 +1,51 @@
+{{define "head"}}
+<style>
+    @media (min-width: 768px) {
+        .trip-sections > section:nth-child(even) .trip-grid > :first-child {
+            order: 2;
+        }
+    }
+</style>
+{{end}}
+
+{{define "content"}}
+
+<!-- Page Hero -->
+<section class="relative bg-timber overflow-hidden">
+    <div class="max-w-[1100px] mx-auto px-4 py-16 md:py-20 text-center relative z-10">
+        <h1 class="font-display font-[800] text-[clamp(36px,5vw,64px)] leading-[1.05] text-cream mb-4">Hunting Trips</h1>
+        <p class="font-body text-cream/80 text-lg max-w-2xl mx-auto">
+            The Elkhorns. The Big Belts. The Missouri breaks. Forrest has guided these drainages for over 25 years. He knows where they move.
+        </p>
+    </div>
+</section>
+
+<!-- Trip Sections -->
+<div class="trip-sections max-w-[1100px] mx-auto px-4 py-16 md:py-20 space-y-16 md:space-y-24">
+    {{range .Trips}}
+    <section class="reveal">
+        {{template "trip-section" .}}
+    </section>
+    {{end}}
+</div>
+
+<!-- Bottom CTA -->
+<section class="section--dark">
+    <div class="golden-glow"></div>
+    <div class="max-w-3xl mx-auto px-4 py-14 md:py-16 text-center relative z-10">
+        <h2 class="font-display font-bold text-cream text-2xl mb-4">Talk to Forrest</h2>
+        <p class="font-body text-sand-dk mb-6">
+            Every hunt starts with a phone call. Tell Forrest what you're after, when you're coming, and whether you've drawn a tag. He'll build the trip from there.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="tel:+14064595352" class="btn btn-primary btn-lg">
+                Call (406) 459-5352
+            </a>
+            <a href="/contact/" class="btn btn-outline-light btn-lg">
+                Send a Message
+            </a>
+        </div>
+    </div>
+</section>
+
+{{end}}

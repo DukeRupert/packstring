@@ -35,3 +35,17 @@ func (p *Pages) FishingPage(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 	}
 }
+
+func (p *Pages) HuntingPage(w http.ResponseWriter, r *http.Request) {
+	pageData := data.GetHuntingPageData()
+	if err := p.templates["hunting"].ExecuteTemplate(w, "base.html", pageData); err != nil {
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+	}
+}
+
+func (p *Pages) PackagesPage(w http.ResponseWriter, r *http.Request) {
+	pageData := data.GetPackagesPageData()
+	if err := p.templates["packages"].ExecuteTemplate(w, "base.html", pageData); err != nil {
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+	}
+}

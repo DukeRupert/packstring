@@ -13,10 +13,17 @@
         <h2 class="font-display text-2xl md:text-3xl font-bold text-ink leading-[1.1] mb-4">{{.Title}}</h2>
         <p class="font-body text-ink-mid text-[15px] leading-[1.7] mb-6">{{.Description}}</p>
 
-        {{if .Waters}}
+        {{if .Locations}}
         <div class="mb-4">
-            <h3 class="font-ui text-[11px] uppercase tracking-[0.35em] text-ink mb-2">Waters</h3>
-            <p class="font-body text-ink-faded text-sm">{{range $i, $w := .Waters}}{{if $i}}, {{end}}{{$w}}{{end}}</p>
+            <h3 class="font-ui text-[11px] uppercase tracking-[0.35em] text-ink mb-2">{{if .LocationLabel}}{{.LocationLabel}}{{else}}Waters{{end}}</h3>
+            <p class="font-body text-ink-faded text-sm">{{range $i, $w := .Locations}}{{if $i}}, {{end}}{{$w}}{{end}}</p>
+        </div>
+        {{end}}
+
+        {{if .Season}}
+        <div class="mb-4">
+            <h3 class="font-ui text-[11px] uppercase tracking-[0.35em] text-ink mb-2">Season</h3>
+            <p class="font-body text-ink-faded text-sm">{{.Season}}</p>
         </div>
         {{end}}
 

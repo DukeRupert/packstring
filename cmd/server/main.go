@@ -21,9 +21,11 @@ func mustParseTemplate(page string) *template.Template {
 func main() {
 	// Build a separate template set per page to avoid "content" block collisions
 	templates := map[string]*template.Template{
-		"home":    mustParseTemplate("home.html"),
-		"trips":   mustParseTemplate("trips.html"),
-		"fishing": mustParseTemplate("fishing.html"),
+		"home":     mustParseTemplate("home.html"),
+		"trips":    mustParseTemplate("trips.html"),
+		"fishing":  mustParseTemplate("fishing.html"),
+		"hunting":  mustParseTemplate("hunting.html"),
+		"packages": mustParseTemplate("packages.html"),
 	}
 
 	pages := handlers.NewPages(templates)
@@ -37,6 +39,8 @@ func main() {
 	mux.HandleFunc("GET /{$}", pages.HomePage)
 	mux.HandleFunc("GET /trips/{$}", pages.TripsHub)
 	mux.HandleFunc("GET /trips/fishing/{$}", pages.FishingPage)
+	mux.HandleFunc("GET /trips/hunting/{$}", pages.HuntingPage)
+	mux.HandleFunc("GET /trips/packages/{$}", pages.PackagesPage)
 
 	// Contact form
 	contact := handlers.NewContact()

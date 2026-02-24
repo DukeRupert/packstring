@@ -1,26 +1,28 @@
 package data
 
-// FishingTrip represents a single fishing trip offering.
-type FishingTrip struct {
-	Title       string
-	Slug        string   // used for ?trip= query param on /contact/
-	Tagline     string
-	Description string
-	Waters      []string
-	Includes    []string
-	Duration    string
-	Price       string
+// TripSection represents a single trip or package offering rendered by the trip-section partial.
+type TripSection struct {
+	Title         string
+	Slug          string   // used for ?trip= query param on /contact/
+	Tagline       string
+	Description   string
+	LocationLabel string   // "Waters", "Hunting Areas", "Destinations" — defaults to "Waters" in template
+	Locations     []string
+	Season        string // optional: e.g. "Sept 15 – Nov 25" for hunting
+	Includes      []string
+	Duration      string
+	Price         string
 }
 
 // FishingPageData holds all data rendered on the /trips/fishing/ page.
 type FishingPageData struct {
-	Trips []FishingTrip
+	Trips []TripSection
 }
 
 // GetFishingPageData returns seed content for the fishing trips page.
 func GetFishingPageData() FishingPageData {
 	return FishingPageData{
-		Trips: []FishingTrip{
+		Trips: []TripSection{
 			{
 				Title:   "Jet Boat Trips",
 				Slug:    "jet-boat",
@@ -28,7 +30,7 @@ func GetFishingPageData() FishingPageData {
 				Description: "The Missouri below Holter Dam runs cold and clear through canyon water most anglers never see from a road. " +
 					"Forrest covers miles of it in a heated jet boat, putting people on rainbow and brown trout that run 18 to 24 inches year-round. " +
 					"Multiple productive runs in a single day.",
-				Waters: []string{"Missouri River (Craig to Cascade)"},
+				Locations: []string{"Missouri River (Craig to Cascade)"},
 				Includes: []string{
 					"All flies and terminal tackle",
 					"Heated jet boat with casting platforms",
@@ -45,7 +47,7 @@ func GetFishingPageData() FishingPageData {
 				Description: "A drift boat puts you in the seams where big trout hold. " +
 					"Float the Missouri, the Big Horn, or the Blackfoot depending on season and conditions. " +
 					"Quieter than a jet boat. Closer to the water. The way fly fishing was meant to be done.",
-				Waters: []string{"Missouri River", "Big Horn River", "Blackfoot River"},
+				Locations: []string{"Missouri River", "Big Horn River", "Blackfoot River"},
 				Includes: []string{
 					"All flies and terminal tackle",
 					"Drift boat with comfortable seating",
@@ -62,7 +64,7 @@ func GetFishingPageData() FishingPageData {
 				Description: "Walleye, perch, and trout on Canyon Ferry, Fort Peck, and Holter. " +
 					"Forrest trolls and jigs aboard a boat rigged with sonar and downriggers. " +
 					"Good water for families. Kids catch fish here.",
-				Waters: []string{"Canyon Ferry Reservoir", "Fort Peck Lake", "Holter Lake"},
+				Locations: []string{"Canyon Ferry Reservoir", "Fort Peck Lake", "Holter Lake"},
 				Includes: []string{
 					"All tackle and bait",
 					"Fully equipped fishing boat with electronics",
@@ -78,7 +80,7 @@ func GetFishingPageData() FishingPageData {
 				Tagline: "Boots in the Water, Rod in Hand",
 				Description: "No boat, no motor. Just the river underfoot and wild trout in pocket water and riffles. " +
 					"Forrest hikes into productive stretches of the Gallatin, the Shields, and spring creeks that don't show up on most maps.",
-				Waters: []string{"Gallatin River", "Shields River", "Various spring creeks"},
+				Locations: []string{"Gallatin River", "Shields River", "Various spring creeks"},
 				Includes: []string{
 					"All flies and terminal tackle",
 					"Waders and boots (if needed)",
@@ -95,7 +97,7 @@ func GetFishingPageData() FishingPageData {
 				Description: "Pike. Smallmouth bass. Chinook salmon. Lake trout. Winter ice fishing on Canyon Ferry. " +
 					"Forrest runs these trips when the trout water gets crowded. " +
 					"Different species, different methods, same guide who knows where they hold.",
-				Waters: []string{"Missouri River", "Fort Peck Lake", "Canyon Ferry Reservoir", "Various rivers"},
+				Locations: []string{"Missouri River", "Fort Peck Lake", "Canyon Ferry Reservoir", "Various rivers"},
 				Includes: []string{
 					"All tackle and bait",
 					"Specialized equipment for target species",
