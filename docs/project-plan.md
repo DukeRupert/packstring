@@ -115,11 +115,11 @@ All content uses real trip info from Forrest's current site + placeholder/royalt
 
 #### 1.2 — Navigation & Footer (2 hours)
 
-- [ ] Build responsive nav: logo, 5 links (Home, Trips, Gallery, Contact, Call Now)
-- [ ] Mobile hamburger menu (Alpine.js toggle)
-- [ ] "Call Now" button styled as accent CTA in nav (always visible, phone icon on mobile)
-- [ ] Footer: contact info, license numbers, quick links, copyright
-- [ ] Verify: nav works on mobile (375px), tablet (768px), desktop (1280px)
+- [x] Build responsive nav: logo, 5 links (Home, Trips, Gallery, Contact, Call Now)
+- [x] Mobile hamburger menu (Alpine.js toggle)
+- [x] "Call Now" button styled as accent CTA in nav (always visible, phone icon on mobile)
+- [x] Footer: contact info, license numbers, quick links, copyright
+- [x] Verify: nav works on mobile (375px), tablet (768px), desktop (1280px)
 
 **Git checkpoint: "layout: responsive nav and footer"**
 
