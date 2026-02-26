@@ -66,7 +66,7 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
         <div>
             <label for="dates" class="font-ui text-[11px] uppercase tracking-[0.35em] text-ink mb-2 block">Preferred Dates</label>
-            <input type="text" id="dates" name="dates" placeholder="e.g. June 15–18, 2026"
+            <input type="text" id="dates" name="dates" x-model="dates" placeholder="e.g. June 15–18, 2026"
                 class="w-full bg-cream border border-sand-dk rounded-[4px] px-4 py-3 font-body text-ink text-sm focus:outline-none focus:border-copper focus:ring-1 focus:ring-copper transition-colors placeholder:text-stone">
         </div>
         <div>
@@ -105,8 +105,10 @@
 
 <script>
 function contactForm() {
+    const params = new URLSearchParams(window.location.search);
     return {
-        trip: new URLSearchParams(window.location.search).get('trip') || ''
+        trip: params.get('trip') || '',
+        dates: params.get('dates') || ''
     }
 }
 </script>
