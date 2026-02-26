@@ -33,6 +33,7 @@ WORKDIR /app
 COPY --from=builder /app/packstring .
 COPY --from=builder /app/templates ./templates
 COPY --from=builder /app/static ./static
+COPY --from=builder /app/data ./data
 
 EXPOSE 8080
 

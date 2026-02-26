@@ -13,6 +13,7 @@ type TripSection struct {
 	Includes      []string
 	Duration      string
 	Price         string
+	Availability  []DateSlot // populated at render time from availability.yaml
 }
 
 // FishingPageData holds all data rendered on the /trips/fishing/ page.

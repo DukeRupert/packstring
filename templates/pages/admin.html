@@ -1,0 +1,133 @@
+{{define "title"}}Availability Editor — MT Hunt & Fish Outfitters{{end}}
+
+{{define "content"}}
+
+<!-- Page Hero -->
+<section class="relative bg-timber overflow-hidden">
+    <div class="max-w-[1100px] mx-auto px-4 py-10 md:py-12 relative z-10 flex items-center justify-between">
+        <div>
+            <h1 class="font-display font-[800] text-[clamp(24px,3.5vw,40px)] leading-[1.05] text-cream">Availability Editor</h1>
+            <p class="font-body text-cream/70 text-sm mt-1">Manage trip date slots and availability status</p>
+        </div>
+        <form method="POST" action="/admin/logout">
+            <button type="submit" class="font-ui text-[11px] uppercase tracking-[0.35em] text-cream/60 hover:text-cream transition-colors">
+                Log Out
+            </button>
+        </form>
+    </div>
+</section>
+
+<!-- Editor -->
+<div class="max-w-[1100px] mx-auto px-4 py-10 md:py-14">
+    <div id="admin-form-wrapper">
+        {{template "admin-form" .}}
+    </div>
+</div>
+
+{{end}}
+
+{{define "admin-form"}}
+<form hx-post="/admin/availability" hx-target="#admin-form-wrapper" hx-swap="innerHTML"
+      x-data="{ tab: '{{(index .Groups 0).Category}}' }">
+
+    {{if .Message}}
+    <div class="bg-cream border border-copper/30 rounded-[4px] p-4 mb-6">
+        <p class="font-body text-ink text-sm">{{.Message}}</p>
+    </div>
+    {{end}}
+
+    <!-- Tabs -->
+    <div class="flex gap-1 border-b border-sand-dk mb-8">
+        {{range .Groups}}
+        <button type="button" @click="tab = '{{.Category}}'"
+            :class="tab === '{{.Category}}'
+                ? 'border-copper text-copper'
+                : 'border-transparent text-ink-faded hover:text-ink hover:border-sand-dk'"
+            class="px-5 py-3 font-ui text-[12px] uppercase tracking-[0.3em] border-b-2 -mb-px transition-colors">
+            {{.Category}}
+        </button>
+        {{end}}
+    </div>
+
+    <!-- Tab Panels -->
+    {{range .Groups}}
+    <div x-show="tab === '{{.Category}}'" x-cloak class="space-y-8">
+        {{range .Trips}}
+        <div x-data="tripEditor('{{.Slug}}', {{jsonSlots .Slots}})" class="bg-white rounded-[4px] border border-sand-dk p-5">
+            <h3 class="font-display font-bold text-ink mb-4">{{.Name}}</h3>
+
+            <div class="space-y-3">
+                <template x-for="(slot, idx) in slots" :key="idx">
+                    <div class="grid grid-cols-1 sm:grid-cols-[1fr_140px_1fr_40px] gap-3 items-end">
+                        <div>
+                            <label x-show="idx === 0" class="font-ui text-[11px] uppercase tracking-[0.35em] text-ink mb-1 block">Dates</label>
+                            <input type="text"
+                                :name="`slots[{{.Slug}}][${idx}][dates]`"
+                                x-model="slot.dates"
+                                placeholder="e.g. Jun 1 – Jun 15"
+                                class="w-full bg-cream border border-sand-dk rounded-[4px] px-3 py-2 font-body text-ink text-sm focus:outline-none focus:border-copper focus:ring-1 focus:ring-copper transition-colors">
+                        </div>
+                        <div>
+                            <label x-show="idx === 0" class="font-ui text-[11px] uppercase tracking-[0.35em] text-ink mb-1 block">Status</label>
+                            <select
+                                :name="`slots[{{.Slug}}][${idx}][status]`"
+                                x-model="slot.status"
+                                class="w-full bg-cream border border-sand-dk rounded-[4px] px-3 py-2 font-body text-ink text-sm focus:outline-none focus:border-copper focus:ring-1 focus:ring-copper transition-colors appearance-none">
+                                <option value="open">Open</option>
+                                <option value="limited">Limited</option>
+                                <option value="booked">Booked</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label x-show="idx === 0" class="font-ui text-[11px] uppercase tracking-[0.35em] text-ink mb-1 block">Note</label>
+                            <input type="text"
+                                :name="`slots[{{.Slug}}][${idx}][note]`"
+                                x-model="slot.note"
+                                placeholder="Optional"
+                                class="w-full bg-cream border border-sand-dk rounded-[4px] px-3 py-2 font-body text-ink text-sm focus:outline-none focus:border-copper focus:ring-1 focus:ring-copper transition-colors">
+                        </div>
+                        <div>
+                            <button type="button" @click="removeSlot(idx)"
+                                class="w-full flex items-center justify-center h-[38px] text-ink-faded hover:text-copper transition-colors rounded-[4px] hover:bg-cream"
+                                title="Remove row">
+                                <svg class="w-4 h-4" viewBox="0 0 16 16" fill="none"><path d="M4 4L12 12M12 4L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                </template>
+            </div>
+
+            <button type="button" @click="addSlot()"
+                class="mt-3 font-ui text-[11px] uppercase tracking-[0.35em] text-copper hover:text-copper-lt transition-colors">
+                + Add Date
+            </button>
+        </div>
+        {{end}}
+    </div>
+    {{end}}
+
+    <!-- Save (always visible) -->
+    <div class="flex items-center gap-4 pt-8 mt-8 border-t border-sand-dk">
+        <button type="submit" class="btn btn-primary btn-lg">
+            Save Availability
+        </button>
+        <span class="font-body text-ink-faded text-sm">Saves all categories. Changes appear on the site immediately.</span>
+    </div>
+
+</form>
+
+<script>
+function tripEditor(slug, initialSlots) {
+    return {
+        slug: slug,
+        slots: initialSlots && initialSlots.length > 0 ? initialSlots : [],
+        addSlot() {
+            this.slots.push({ dates: '', status: 'open', note: '' });
+        },
+        removeSlot(idx) {
+            this.slots.splice(idx, 1);
+        }
+    }
+}
+</script>
+{{end}}

@@ -9,7 +9,7 @@ dev:
 	@$(MAKE) -j2 css-watch air
 
 air:
-	air
+	PACKSTRING_DEV=1 air
 
 css-watch:
 	$(TAILWIND) -i $(CSS_INPUT) -o $(CSS_OUTPUT) --watch

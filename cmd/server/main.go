@@ -4,8 +4,10 @@ import (
 	"html/template"
 	"log"
 	"net/http"
+	"os"
 	"path/filepath"
 
+	"github.com/firefly/packstring/internal/data"
 	"github.com/firefly/packstring/internal/handlers"
 )
 
@@ -13,6 +15,16 @@ import (
 // combining it with the base layout and all partials.
 func mustParseTemplate(page string) *template.Template {
 	tmpl := template.Must(template.ParseGlob(filepath.Join("templates", "layouts", "*.html")))
+	template.Must(tmpl.ParseGlob(filepath.Join("templates", "partials", "*.html")))
+	template.Must(tmpl.ParseFiles(filepath.Join("templates", "pages", page)))
+	return tmpl
+}
+
+// mustParseAdminTemplate builds a template set with the admin FuncMap.
+func mustParseAdminTemplate(page string) *template.Template {
+	tmpl := template.Must(
+		template.New("").Funcs(handlers.AdminFuncMap()).ParseGlob(filepath.Join("templates", "layouts", "*.html")),
+	)
 	template.Must(tmpl.ParseGlob(filepath.Join("templates", "partials", "*.html")))
 	template.Must(tmpl.ParseFiles(filepath.Join("templates", "pages", page)))
 	return tmpl
@@ -30,7 +42,10 @@ func main() {
 		"contact":  mustParseTemplate("contact.html"),
 	}
 
-	pages := handlers.NewPages(templates)
+	devMode := os.Getenv("PACKSTRING_DEV") == "1"
+	availability := data.NewAvailabilityStore("data/availability.yaml", devMode)
+
+	pages := handlers.NewPages(templates, availability)
 
 	mux := http.NewServeMux()
 
@@ -50,8 +65,30 @@ func main() {
 	contact := handlers.NewContact(templates)
 	mux.HandleFunc("POST /contact", contact.Submit)
 
-	log.Println("Starting server on :8080")
-	if err := http.ListenAndServe(":8080", mux); err != nil {
+	// Admin routes (only if ADMIN_PASSWORD is set)
+	adminPassword := os.Getenv("ADMIN_PASSWORD")
+	if adminPassword != "" {
+		adminTemplates := map[string]*template.Template{
+			"admin-login": mustParseTemplate("admin-login.html"),
+			"admin":       mustParseAdminTemplate("admin.html"),
+		}
+		admin := handlers.NewAdmin(adminTemplates, availability, adminPassword)
+		mux.HandleFunc("GET /admin/login", admin.LoginPage)
+		mux.HandleFunc("POST /admin/login", admin.LoginSubmit)
+		mux.HandleFunc("POST /admin/logout", admin.Logout)
+		mux.HandleFunc("GET /admin/availability/{$}", admin.RequireAuth(admin.EditPage))
+		mux.HandleFunc("POST /admin/availability", admin.RequireAuth(admin.SaveAvailability))
+		log.Println("Admin routes registered at /admin/")
+	} else {
+		log.Println("ADMIN_PASSWORD not set — admin routes disabled")
+	}
+
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
+	log.Printf("Starting server on :%s", port)
+	if err := http.ListenAndServe(":"+port, mux); err != nil {
 		log.Fatal(err)
 	}
 }

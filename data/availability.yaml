@@ -1,0 +1,96 @@
+# Trip Availability — MT Hunt & Fish Outfitters
+# Edit this file to update availability on the website.
+# Status options: open, limited, booked
+
+trips:
+    antelope-hunting:
+        - dates: Sept 1 – Sept 15
+          status: booked
+        - dates: Sept 16 – Sept 30
+          status: limited
+        - dates: Oct 1 – Oct 15
+          status: open
+    bear-hunting:
+        - dates: Apr 15 – May 31 (Spring)
+          status: open
+        - dates: Sept 15 – Oct 31 (Fall)
+          status: limited
+          note: 3 spots left
+        - dates: Nov 1 – Nov 25 (Fall)
+          status: open
+    deer-hunting:
+        - dates: Oct 20 – Oct 31
+          status: booked
+        - dates: Nov 1 – Nov 15
+          status: limited
+        - dates: Nov 16 – Nov 25
+          status: open
+    drift-boat:
+        - dates: Jun 1 – Jun 30
+          status: limited
+          note: Weekends full
+        - dates: Jul 1 – Jul 31
+          status: open
+        - dates: Aug 1 – Aug 31
+          status: open
+        - dates: Sep 1 – Sep 30
+          status: open
+    elk-hunting:
+        - dates: Sept 15 – Sept 30
+          status: booked
+        - dates: Oct 1 – Oct 31
+          status: limited
+          note: 2 spots left
+        - dates: Nov 1 – Nov 25
+          status: open
+    jet-boat:
+        - dates: Jun 1 – Jun 15
+          status: booked
+        - dates: Jun 16 – Jun 30
+          status: limited
+          note: 3 spots left
+        - dates: Jul 1 – Jul 31
+          status: open
+        - dates: Aug 1 – Aug 14
+          status: open
+    lake:
+        - dates: Jun 1 – Jun 30
+          status: open
+        - dates: Jul 1 – Jul 31
+          status: open
+        - dates: Aug 1 – Aug 31
+          status: limited
+        - dates: Dec – Feb (Ice Fishing)
+          status: open
+          note: Ice fishing season
+    six-pack:
+        - dates: Jun 15 – Aug 31
+          status: limited
+          note: 1 slot left in July
+        - dates: Sept 1 – Oct 15
+          status: open
+        - dates: Oct 16 – Nov 15
+          status: open
+    specialty:
+        - dates: Jun – Aug (Pike & Bass)
+          status: open
+        - dates: Sep – Oct (Salmon)
+          status: limited
+        - dates: Dec – Feb (Ice Fishing)
+          status: open
+    triple-header:
+        - dates: Jun 15 – Aug 31
+          status: open
+        - dates: Sept 1 – Sept 30
+          status: limited
+          note: Peak season
+        - dates: Oct 1 – Nov 15
+          status: open
+    wade:
+        - dates: Jun 1 – Jun 30
+          status: open
+        - dates: Jul 1 – Jul 31
+          status: limited
+          note: 4 spots left
+        - dates: Aug 1 – Aug 31
+          status: open
