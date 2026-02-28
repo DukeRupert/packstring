@@ -1,0 +1,39 @@
+{{define "admin-nav"}}
+<nav class="bg-timber border-b border-timber-edge">
+    <div class="max-w-[1100px] mx-auto px-4">
+        <div class="flex items-center justify-between h-14">
+            <!-- Nav links (scrollable on mobile) -->
+            <div class="flex items-center gap-1 overflow-x-auto -mx-1 px-1 scrollbar-hide">
+                <a href="/admin/"
+                   class="flex-shrink-0 px-3 py-2 font-ui text-[11px] uppercase tracking-[0.3em] rounded-[4px] transition-colors
+                          {{if eq .ActiveNav "dashboard"}}bg-timber-lt text-copper{{else}}text-cream/60 hover:text-cream hover:bg-timber-lt/50{{end}}">
+                    Dashboard
+                </a>
+                <a href="/admin/inquiries/"
+                   class="flex-shrink-0 px-3 py-2 font-ui text-[11px] uppercase tracking-[0.3em] rounded-[4px] transition-colors
+                          {{if eq .ActiveNav "inquiries"}}bg-timber-lt text-copper{{else}}text-cream/60 hover:text-cream hover:bg-timber-lt/50{{end}}">
+                    Inquiries
+                </a>
+                <a href="/admin/availability/"
+                   class="flex-shrink-0 px-3 py-2 font-ui text-[11px] uppercase tracking-[0.3em] rounded-[4px] transition-colors
+                          {{if eq .ActiveNav "availability"}}bg-timber-lt text-copper{{else}}text-cream/60 hover:text-cream hover:bg-timber-lt/50{{end}}">
+                    Availability
+                </a>
+                <a href="/admin/deposits/"
+                   class="flex-shrink-0 px-3 py-2 font-ui text-[11px] uppercase tracking-[0.3em] rounded-[4px] transition-colors
+                          {{if eq .ActiveNav "deposits"}}bg-timber-lt text-copper{{else}}text-cream/60 hover:text-cream hover:bg-timber-lt/50{{end}}">
+                    Deposits
+                </a>
+            </div>
+
+            <!-- Logout -->
+            <form method="POST" action="/admin/logout" class="flex-shrink-0 ml-4">
+                <button type="submit"
+                    class="px-3 py-2 font-ui text-[11px] uppercase tracking-[0.3em] text-cream/40 hover:text-cream transition-colors">
+                    Log Out
+                </button>
+            </form>
+        </div>
+    </div>
+</nav>
+{{end}}

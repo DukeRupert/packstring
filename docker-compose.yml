@@ -1,0 +1,17 @@
+services:
+  web:
+    image: ${DOCKER_IMAGE:-dukerupert/packstring}
+    ports:
+      - "${LISTEN_PORT:-8080}:80"
+    restart: unless-stopped
+    volumes:
+      - packstring-data:/app/data
+    environment:
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
+      - DATABASE_PATH=data/packstring.db
+      - STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY}
+      - STRIPE_WEBHOOK_SECRET=${STRIPE_WEBHOOK_SECRET}
+      - SITE_URL=${SITE_URL}
+
+volumes:
+  packstring-data:

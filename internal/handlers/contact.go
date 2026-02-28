@@ -7,14 +7,16 @@ import (
 	"strings"
 
 	"github.com/firefly/packstring/internal/data"
+	"github.com/firefly/packstring/internal/db"
 )
 
 type Contact struct {
 	templates map[string]*template.Template
+	store     *db.Store // nil if no database configured
 }
 
-func NewContact(templates map[string]*template.Template) *Contact {
-	return &Contact{templates: templates}
+func NewContact(templates map[string]*template.Template, store *db.Store) *Contact {
+	return &Contact{templates: templates, store: store}
 }
 
 func (c *Contact) Submit(w http.ResponseWriter, r *http.Request) {
@@ -49,17 +51,43 @@ func (c *Contact) Submit(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// In production, this would send an email via SMTP.
-	// For the demo, just log and return success.
 	tripSlug := strings.TrimSpace(r.FormValue("trip"))
-	log.Printf("Contact inquiry from %s <%s> — trip: %s", name, email, tripSlug)
+	phone := strings.TrimSpace(r.FormValue("phone"))
+	dates := strings.TrimSpace(r.FormValue("dates"))
+	partySize := strings.TrimSpace(r.FormValue("party_size"))
+	experience := strings.TrimSpace(r.FormValue("experience"))
+	message := strings.TrimSpace(r.FormValue("message"))
+	tripName := data.TripDisplayName(tripSlug)
+
+	// Store in database if available
+	if c.store != nil {
+		inq := &db.Inquiry{
+			Name:       name,
+			Email:      email,
+			Phone:      phone,
+			TripSlug:   tripSlug,
+			TripName:   tripName,
+			Dates:      dates,
+			PartySize:  partySize,
+			Experience: experience,
+			Message:    message,
+		}
+		id, err := c.store.CreateInquiry(inq)
+		if err != nil {
+			log.Printf("[contact] DB error: %v", err)
+		} else {
+			log.Printf("[contact] inquiry #%d from %s <%s> — trip: %s", id, name, email, tripSlug)
+		}
+	} else {
+		log.Printf("Contact inquiry from %s <%s> — trip: %s", name, email, tripSlug)
+	}
 
 	c.renderSuccess(w, data.ContactSuccessData{
 		Name:      name,
 		Email:     email,
-		Trip:      data.TripDisplayName(tripSlug),
-		Dates:     strings.TrimSpace(r.FormValue("dates")),
-		PartySize: strings.TrimSpace(r.FormValue("party_size")),
+		Trip:      tripName,
+		Dates:     dates,
+		PartySize: partySize,
 	})
 }
 

@@ -4,3 +4,7 @@ bin/
 tailwindcss
 static/css/output.css
 static/img/source/
+data/*.db
+data/*.db-wal
+data/*.db-shm
+.env

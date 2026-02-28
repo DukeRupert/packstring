@@ -1,0 +1,98 @@
+{{define "content"}}
+
+{{template "admin-nav" .}}
+{{template "admin-toast" .}}
+
+<!-- Page Header -->
+<section class="bg-timber">
+    <div class="max-w-[1100px] mx-auto px-4 py-8 md:py-10">
+        <h1 class="font-display font-[800] text-[clamp(24px,3.5vw,36px)] leading-[1.05] text-cream">Inquiries</h1>
+        <p class="font-body text-cream/70 text-sm mt-1">View and manage client inquiries from the contact form</p>
+    </div>
+</section>
+
+<div class="max-w-[1100px] mx-auto px-4 py-8 md:py-12">
+
+    <!-- Filter Tabs -->
+    <div class="flex gap-1 overflow-x-auto -mx-1 px-1 mb-8 scrollbar-hide">
+        <a href="/admin/inquiries/"
+           class="flex-shrink-0 px-4 py-2 rounded-[4px] font-ui text-[11px] uppercase tracking-[0.3em] transition-colors min-h-[44px] flex items-center
+                  {{if eq .CurrentStatus ""}}bg-copper/10 text-copper{{else}}text-ink-faded hover:text-ink hover:bg-sand-lt{{end}}">
+            All <span class="ml-1.5 text-[10px]">({{.AllCount}})</span>
+        </a>
+        <a href="/admin/inquiries/?status=new"
+           class="flex-shrink-0 px-4 py-2 rounded-[4px] font-ui text-[11px] uppercase tracking-[0.3em] transition-colors min-h-[44px] flex items-center
+                  {{if eq .CurrentStatus "new"}}bg-copper/10 text-copper{{else}}text-ink-faded hover:text-ink hover:bg-sand-lt{{end}}">
+            New <span class="ml-1.5 text-[10px]">({{.NewCount}})</span>
+        </a>
+        <a href="/admin/inquiries/?status=contacted"
+           class="flex-shrink-0 px-4 py-2 rounded-[4px] font-ui text-[11px] uppercase tracking-[0.3em] transition-colors min-h-[44px] flex items-center
+                  {{if eq .CurrentStatus "contacted"}}bg-copper/10 text-copper{{else}}text-ink-faded hover:text-ink hover:bg-sand-lt{{end}}">
+            Contacted <span class="ml-1.5 text-[10px]">({{.ContactedCount}})</span>
+        </a>
+        <a href="/admin/inquiries/?status=booked"
+           class="flex-shrink-0 px-4 py-2 rounded-[4px] font-ui text-[11px] uppercase tracking-[0.3em] transition-colors min-h-[44px] flex items-center
+                  {{if eq .CurrentStatus "booked"}}bg-copper/10 text-copper{{else}}text-ink-faded hover:text-ink hover:bg-sand-lt{{end}}">
+            Booked <span class="ml-1.5 text-[10px]">({{.BookedCount}})</span>
+        </a>
+        <a href="/admin/inquiries/?status=archived"
+           class="flex-shrink-0 px-4 py-2 rounded-[4px] font-ui text-[11px] uppercase tracking-[0.3em] transition-colors min-h-[44px] flex items-center
+                  {{if eq .CurrentStatus "archived"}}bg-copper/10 text-copper{{else}}text-ink-faded hover:text-ink hover:bg-sand-lt{{end}}">
+            Archived <span class="ml-1.5 text-[10px]">({{.ArchivedCount}})</span>
+        </a>
+    </div>
+
+    <!-- Inquiry Cards -->
+    {{if .Inquiries}}
+    <div class="space-y-3">
+        {{range .Inquiries}}
+        <a href="/admin/inquiries/{{.ID}}" class="block bg-white rounded-[4px] border border-sand-dk p-5 hover:border-copper transition-colors">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div class="min-w-0">
+                    <div class="flex items-center gap-3 mb-1">
+                        <p class="font-display font-semibold text-ink truncate">{{.Name}}</p>
+                        <span class="inline-block px-2 py-0.5 rounded-[4px] font-ui text-[10px] uppercase tracking-[0.3em] flex-shrink-0
+                            {{if eq .Status "new"}}bg-copper/10 text-copper
+                            {{else if eq .Status "contacted"}}bg-river/10 text-river
+                            {{else if eq .Status "booked"}}bg-forest/10 text-forest
+                            {{else}}bg-stone/10 text-stone{{end}}">
+                            {{statusLabel .Status}}
+                        </span>
+                    </div>
+                    <p class="font-body text-ink-faded text-sm">
+                        {{if .TripName}}{{.TripName}}{{else}}General inquiry{{end}}
+                        {{if .Dates}} &middot; {{.Dates}}{{end}}
+                    </p>
+                </div>
+                <div class="flex items-center gap-4 flex-shrink-0">
+                    <span class="font-body text-ink-faded text-xs">{{timeAgo .CreatedAt}}</span>
+                    <span class="font-ui text-[11px] uppercase tracking-[0.3em] text-copper">View Details &rarr;</span>
+                </div>
+            </div>
+        </a>
+        {{end}}
+    </div>
+    {{else}}
+    <!-- Empty State -->
+    <div class="bg-white rounded-[4px] border border-sand-dk p-8 text-center">
+        <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-sand-lt flex items-center justify-center">
+            <svg class="w-8 h-8 text-ink-faded" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"/>
+            </svg>
+        </div>
+        {{if eq .CurrentStatus ""}}
+        <p class="font-display font-semibold text-ink mb-1">No inquiries yet</p>
+        <p class="font-body text-ink-faded text-sm max-w-md mx-auto">
+            When someone fills out the contact form on your website, their inquiry will show up here.
+        </p>
+        {{else}}
+        <p class="font-display font-semibold text-ink mb-1">No {{.CurrentStatus}} inquiries</p>
+        <p class="font-body text-ink-faded text-sm">
+            <a href="/admin/inquiries/" class="text-copper hover:underline">View all inquiries</a>
+        </p>
+        {{end}}
+    </div>
+    {{end}}
+
+</div>
+{{end}}

@@ -1,0 +1,75 @@
+{{define "content"}}
+
+{{template "admin-nav" .}}
+{{template "admin-toast" .}}
+
+<!-- Page Header -->
+<section class="bg-timber">
+    <div class="max-w-[1100px] mx-auto px-4 py-8 md:py-10">
+        <h1 class="font-display font-[800] text-[clamp(24px,3.5vw,36px)] leading-[1.05] text-cream">Deposit Settings</h1>
+        <p class="font-body text-cream/70 text-sm mt-1">Set deposit amounts for each trip type</p>
+    </div>
+</section>
+
+<div class="max-w-[1100px] mx-auto px-4 py-8 md:py-12">
+
+    <!-- How It Works -->
+    <div class="bg-cream border border-copper/20 rounded-[4px] p-5 mb-8">
+        <h2 class="font-display font-semibold text-ink mb-2">How deposits work</h2>
+        <ol class="font-body text-ink-faded text-sm space-y-1.5 list-decimal list-inside">
+            <li>Set a deposit amount and enable it for each trip type below</li>
+            <li>When a client submits an inquiry, view it in <a href="/admin/inquiries/" class="text-copper hover:underline">Inquiries</a></li>
+            <li>Click "Generate Deposit Link" on the inquiry detail page</li>
+            <li>Copy the payment link and send it to the client via email or text</li>
+            <li>The client pays on Stripe's secure checkout page</li>
+            <li>Payment status updates automatically in the inquiry details</li>
+        </ol>
+    </div>
+
+    <!-- Deposit Config Form -->
+    <form method="POST" action="/admin/deposits" class="space-y-4">
+
+        {{range .Trips}}
+        <div class="bg-white rounded-[4px] border border-sand-dk p-5">
+            <div class="flex flex-col sm:flex-row sm:items-center gap-4">
+                <!-- Trip Name -->
+                <div class="flex-1 min-w-0">
+                    <p class="font-display font-semibold text-ink">{{.Name}}</p>
+                    <p class="font-body text-ink-faded text-xs">{{.Slug}}</p>
+                </div>
+
+                <!-- Amount -->
+                <div class="sm:w-40">
+                    <label class="font-ui text-[10px] uppercase tracking-[0.35em] text-ink-faded mb-1 block">Amount ($)</label>
+                    <div class="relative">
+                        <span class="absolute left-3 top-1/2 -translate-y-1/2 font-body text-ink-faded text-sm">$</span>
+                        <input type="number" name="amount_{{.Slug}}" value="{{if gt .AmountCents 0}}{{divide .AmountCents 100}}{{end}}"
+                            min="0" step="1" placeholder="0"
+                            class="w-full bg-cream border border-sand-dk rounded-[4px] pl-7 pr-3 py-2 font-body text-ink text-sm focus:outline-none focus:border-copper focus:ring-1 focus:ring-copper transition-colors">
+                    </div>
+                </div>
+
+                <!-- Enabled Toggle -->
+                <div class="sm:w-28 flex items-center gap-2">
+                    <label class="relative inline-flex items-center cursor-pointer min-h-[44px]">
+                        <input type="checkbox" name="enabled_{{.Slug}}" {{if .Enabled}}checked{{end}}
+                            class="sr-only peer">
+                        <div class="w-11 h-6 bg-sand-dk peer-focus:ring-2 peer-focus:ring-copper/30 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[50%] after:-translate-y-[50%] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-forest"></div>
+                        <span class="ml-2 font-ui text-[11px] uppercase tracking-[0.3em] text-ink-faded">Enabled</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        {{end}}
+
+        <!-- Save Button (sticky on mobile) -->
+        <div class="sticky bottom-0 bg-sand pt-4 pb-6 -mx-4 px-4 border-t border-sand-dk sm:relative sm:bg-transparent sm:border-0 sm:pt-6 sm:pb-0 sm:mx-0 sm:px-0">
+            <button type="submit" class="btn btn-primary btn-lg w-full sm:w-auto">
+                Save Deposit Settings
+            </button>
+        </div>
+
+    </form>
+
+</div>
+{{end}}

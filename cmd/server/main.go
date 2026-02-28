@@ -8,6 +8,7 @@ import (
 	"path/filepath"
 
 	"github.com/firefly/packstring/internal/data"
+	"github.com/firefly/packstring/internal/db"
 	"github.com/firefly/packstring/internal/handlers"
 )
 
@@ -45,6 +46,18 @@ func main() {
 	devMode := os.Getenv("PACKSTRING_DEV") == "1"
 	availability := data.NewAvailabilityStore("data/availability.yaml", devMode)
 
+	// Initialize SQLite database
+	dbPath := os.Getenv("DATABASE_PATH")
+	if dbPath == "" {
+		dbPath = "data/packstring.db"
+	}
+	store, err := db.Open(dbPath)
+	if err != nil {
+		log.Fatalf("Failed to open database: %v", err)
+	}
+	defer store.Close()
+	log.Printf("Database opened at %s", dbPath)
+
 	pages := handlers.NewPages(templates, availability)
 
 	mux := http.NewServeMux()
@@ -70,22 +83,57 @@ func main() {
 	mux.HandleFunc("GET /contact/{$}", pages.ContactPage)
 
 	// Contact form
-	contact := handlers.NewContact(templates)
+	contact := handlers.NewContact(templates, store)
 	mux.HandleFunc("POST /contact", contact.Submit)
 
 	// Admin routes (only if ADMIN_PASSWORD is set)
 	adminPassword := os.Getenv("ADMIN_PASSWORD")
 	if adminPassword != "" {
 		adminTemplates := map[string]*template.Template{
-			"admin-login": mustParseTemplate("admin-login.html"),
-			"admin":       mustParseAdminTemplate("admin.html"),
+			"admin-login":          mustParseTemplate("admin-login.html"),
+			"admin":                mustParseAdminTemplate("admin.html"),
+			"admin-dashboard":      mustParseAdminTemplate("admin-dashboard.html"),
+			"admin-inquiries":      mustParseAdminTemplate("admin-inquiries.html"),
+			"admin-inquiry-detail": mustParseAdminTemplate("admin-inquiry-detail.html"),
+			"admin-deposits":       mustParseAdminTemplate("admin-deposits.html"),
 		}
-		admin := handlers.NewAdmin(adminTemplates, availability, adminPassword)
+		admin := handlers.NewAdmin(adminTemplates, availability, adminPassword, store)
+
+		// Auth
 		mux.HandleFunc("GET /admin/login", admin.LoginPage)
 		mux.HandleFunc("POST /admin/login", admin.LoginSubmit)
 		mux.HandleFunc("POST /admin/logout", admin.Logout)
+
+		// Dashboard
+		mux.HandleFunc("GET /admin/{$}", admin.RequireAuth(admin.Dashboard))
+
+		// Availability
 		mux.HandleFunc("GET /admin/availability/{$}", admin.RequireAuth(admin.EditPage))
 		mux.HandleFunc("POST /admin/availability", admin.RequireAuth(admin.SaveAvailability))
+
+		// Inquiries
+		mux.HandleFunc("GET /admin/inquiries/{$}", admin.RequireAuth(admin.InquiriesList))
+		mux.HandleFunc("GET /admin/inquiries/{id}", admin.RequireAuth(admin.InquiryDetail))
+		mux.HandleFunc("POST /admin/inquiries/{id}/status", admin.RequireAuth(admin.UpdateInquiryStatus))
+		mux.HandleFunc("POST /admin/inquiries/{id}/notes", admin.RequireAuth(admin.UpdateInquiryNotes))
+
+		// Deposits
+		mux.HandleFunc("GET /admin/deposits/{$}", admin.RequireAuth(admin.DepositsPage))
+		mux.HandleFunc("POST /admin/deposits", admin.RequireAuth(admin.SaveDeposits))
+		mux.HandleFunc("POST /admin/inquiries/{id}/deposit", admin.RequireAuth(admin.GenerateDepositLink))
+
+		// Stripe webhook (no auth — verified by signature)
+		stripe := handlers.NewStripeHandler(store)
+		mux.HandleFunc("POST /stripe/webhook", stripe.HandleWebhook)
+
+		// Public payment pages
+		paymentTemplates := map[string]*template.Template{
+			"payment-success": mustParseTemplate("payment-success.html"),
+			"payment-cancel":  mustParseTemplate("payment-cancel.html"),
+		}
+		mux.HandleFunc("GET /payments/success", handlers.PaymentSuccess(paymentTemplates))
+		mux.HandleFunc("GET /payments/cancel", handlers.PaymentCancel(paymentTemplates))
+
 		log.Println("Admin routes registered at /admin/")
 	} else {
 		log.Println("ADMIN_PASSWORD not set — admin routes disabled")

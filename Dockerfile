@@ -11,7 +11,7 @@ RUN curl -sLO https://github.com/tailwindlabs/tailwindcss/releases/latest/downlo
     && chmod +x tailwindcss
 
 # Copy dependency files first for caching
-COPY go.mod ./
+COPY go.mod go.sum ./
 RUN go mod download
 
 # Copy source
@@ -35,6 +35,7 @@ COPY --from=builder /app/templates ./templates
 COPY --from=builder /app/static ./static
 COPY --from=builder /app/data ./data
 
-EXPOSE 8080
+ENV PORT=80
+EXPOSE 80
 
 CMD ["./packstring"]

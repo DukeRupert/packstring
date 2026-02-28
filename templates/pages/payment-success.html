@@ -1,0 +1,46 @@
+{{define "content"}}
+
+<!-- Success Hero -->
+<section class="relative bg-timber overflow-hidden">
+    <div class="max-w-[1100px] mx-auto px-4 py-16 md:py-20 text-center relative z-10">
+        <div class="w-20 h-20 mx-auto mb-6 rounded-full bg-forest/20 flex items-center justify-center">
+            <svg class="w-10 h-10 text-forest-lt" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+            </svg>
+        </div>
+        <h1 class="font-display font-[800] text-[clamp(28px,4vw,44px)] leading-[1.05] text-cream mb-3">Deposit Received</h1>
+        <p class="font-body text-cream/80 text-base max-w-md mx-auto">
+            Thank you! Your deposit has been received and your trip is confirmed.
+            You'll receive a confirmation email from Stripe shortly.
+        </p>
+    </div>
+</section>
+
+<div class="max-w-md mx-auto px-4 py-12 md:py-16 text-center">
+    <div class="bg-white rounded-[4px] border border-sand-dk p-6 mb-6">
+        <h2 class="font-display font-semibold text-ink mb-2">What happens next?</h2>
+        <ul class="font-body text-ink-faded text-sm space-y-2 text-left">
+            <li class="flex items-start gap-2">
+                <svg class="w-4 h-4 text-forest flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                </svg>
+                <span>You'll receive a payment receipt via email</span>
+            </li>
+            <li class="flex items-start gap-2">
+                <svg class="w-4 h-4 text-forest flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                </svg>
+                <span>Forrest will be in touch to finalize trip details</span>
+            </li>
+            <li class="flex items-start gap-2">
+                <svg class="w-4 h-4 text-forest flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                </svg>
+                <span>Start packing your gear!</span>
+            </li>
+        </ul>
+    </div>
+
+    <a href="/" class="btn btn-outline">Back to Site</a>
+</div>
+{{end}}
