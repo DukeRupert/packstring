@@ -18,12 +18,19 @@ type TripSection struct {
 
 // FishingPageData holds all data rendered on the /trips/fishing/ page.
 type FishingPageData struct {
+	Meta  PageMeta
 	Trips []TripSection
 }
 
 // GetFishingPageData returns seed content for the fishing trips page.
 func GetFishingPageData() FishingPageData {
 	return FishingPageData{
+		Meta: PageMeta{
+			Title:        "Fishing Trips — MT Hunt & Fish Outfitters",
+			Description:  "Guided fishing trips on the Missouri River, Canyon Ferry, Fort Peck, and more. Jet boat, drift boat, wade, and lake trips from Helena, Montana.",
+			CanonicalURL: SiteURL + "/trips/fishing/",
+			OGImage:      SiteURL + "/static/img/trips/fishing-card-800w.webp",
+		},
 		Trips: []TripSection{
 			{
 				Title:   "Jet Boat Trips",

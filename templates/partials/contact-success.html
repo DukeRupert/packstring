@@ -12,4 +12,77 @@
         Call (406) 459-5352
     </a>
 </div>
+
+<!-- Auto-Reply Demo Preview -->
+<div class="mt-12 max-w-2xl mx-auto">
+    <div class="bg-copper-dim border border-copper/30 rounded-[4px] px-4 py-3 mb-6 text-center">
+        <p class="font-ui text-[11px] uppercase tracking-[0.35em] text-copper font-semibold">Packstring Demo</p>
+        <p class="font-body text-ink-mid text-sm mt-1">Here's the auto-reply your client would receive</p>
+    </div>
+
+    <div class="bg-white border border-sand-dk rounded-[4px] shadow-sm overflow-hidden">
+        <!-- Email Header -->
+        <div class="border-b border-sand-dk px-6 py-4 space-y-1">
+            <p class="font-ui text-[11px] uppercase tracking-[0.15em] text-stone">
+                <span class="font-semibold text-ink-mid">From:</span> Forrest Fawthrop &lt;forrest@mthuntfish.com&gt;
+            </p>
+            {{if .Email}}<p class="font-ui text-[11px] uppercase tracking-[0.15em] text-stone">
+                <span class="font-semibold text-ink-mid">To:</span> {{.Email}}
+            </p>{{end}}
+            <p class="font-ui text-[11px] uppercase tracking-[0.15em] text-stone">
+                <span class="font-semibold text-ink-mid">Subject:</span> Got your inquiry{{if .Trip}} — {{.Trip}}{{end}}
+            </p>
+        </div>
+
+        <!-- Email Body -->
+        <div class="px-6 py-6 space-y-4">
+            <p class="font-body text-ink text-[15px] leading-[1.7]">
+                {{if .Name}}{{.Name}},{{else}}Hi there,{{end}}
+            </p>
+
+            <p class="font-body text-ink text-[15px] leading-[1.7]">
+                Thanks for reaching out. I got your inquiry and I'm already looking at the calendar.
+            </p>
+
+            {{if or .Trip .Dates .PartySize}}
+            <div class="bg-sand-lt border border-sand-dk rounded-[4px] px-4 py-3 space-y-1">
+                <p class="font-ui text-[11px] uppercase tracking-[0.35em] text-copper font-semibold mb-2">Trip Details</p>
+                {{if .Trip}}<p class="font-body text-ink text-sm"><span class="font-semibold">Trip:</span> {{.Trip}}</p>{{end}}
+                {{if .Dates}}<p class="font-body text-ink text-sm"><span class="font-semibold">Dates:</span> {{.Dates}}</p>{{end}}
+                {{if .PartySize}}<p class="font-body text-ink text-sm"><span class="font-semibold">Party Size:</span> {{.PartySize}}</p>{{end}}
+            </div>
+            {{end}}
+
+            <p class="font-body text-ink text-[15px] leading-[1.7]">
+                I'll send you a full trip plan and quote within 48 hours. In the meantime, here's a quick gear checklist so you know what to bring:
+            </p>
+
+            <ul class="font-body text-ink text-[15px] leading-[1.7] space-y-1 ml-4">
+                <li>&#x2713; Polarized sunglasses</li>
+                <li>&#x2713; Layered clothing (mornings are cold, even in July)</li>
+                <li>&#x2713; Sunscreen and a hat</li>
+                <li>&#x2713; Camera</li>
+                <li>&#x2713; Valid Montana fishing or hunting license (I can help with this)</li>
+            </ul>
+
+            <p class="font-body text-ink text-[15px] leading-[1.7]">
+                If you have questions before then, call me anytime at <strong>(406) 459-5352</strong>. I'm usually on the water by 6 AM, but I'll call you back the same day.
+            </p>
+
+            <p class="font-body text-ink text-[15px] leading-[1.7]">
+                Talk soon,<br>
+                <strong>Forrest Fawthrop</strong><br>
+                MT Hunt & Fish Outfitters<br>
+                Helena, Montana
+            </p>
+        </div>
+
+        <!-- Email Footer -->
+        <div class="border-t border-sand-dk px-6 py-3 bg-sand-lt">
+            <p class="font-mono text-[10px] tracking-[0.05em] text-stone text-center">
+                Montana Outfitter License #20194 &middot; USCG Captain License #3427176
+            </p>
+        </div>
+    </div>
+</div>
 {{end}}

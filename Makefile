@@ -40,4 +40,4 @@ deploy:
 	@echo "Run with: docker run -p 8080:8080 packstring:latest"
 
 lighthouse:
-	@echo "Lighthouse CI not yet configured."
+	npx lighthouse http://localhost:8080 --output html --output-path ./lighthouse-report.html --chrome-flags="--headless --no-sandbox"

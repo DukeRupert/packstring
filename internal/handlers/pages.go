@@ -69,7 +69,8 @@ func (p *Pages) GalleryPage(w http.ResponseWriter, r *http.Request) {
 }
 
 func (p *Pages) ContactPage(w http.ResponseWriter, r *http.Request) {
-	if err := p.templates["contact"].ExecuteTemplate(w, "base.html", nil); err != nil {
+	pageData := data.GetContactPageData()
+	if err := p.templates["contact"].ExecuteTemplate(w, "base.html", pageData); err != nil {
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 	}
 }

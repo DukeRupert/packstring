@@ -17,6 +17,7 @@ type GalleryImage struct {
 
 // GalleryPageData holds all data rendered on the gallery page.
 type GalleryPageData struct {
+	Meta       PageMeta
 	Categories []GalleryCategory
 	Images     []GalleryImage
 }
@@ -24,6 +25,12 @@ type GalleryPageData struct {
 // GetGalleryPageData returns seed content for the gallery page.
 func GetGalleryPageData() GalleryPageData {
 	return GalleryPageData{
+		Meta: PageMeta{
+			Title:        "Photo Gallery — MT Hunt & Fish Outfitters",
+			Description:  "Photos from guided fishing and hunting trips with MT Hunt & Fish Outfitters. Missouri River, Canyon Ferry, Elkhorn Mountains, and more.",
+			CanonicalURL: SiteURL + "/gallery/",
+			OGImage:      SiteURL + "/static/img/hero/hero-montana-1600w.webp",
+		},
 		Categories: []GalleryCategory{
 			{Name: "Fishing", Slug: "fishing"},
 			{Name: "Hunting", Slug: "hunting"},

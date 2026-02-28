@@ -5,6 +5,8 @@ import (
 	"log"
 	"net/http"
 	"strings"
+
+	"github.com/firefly/packstring/internal/data"
 )
 
 type Contact struct {
@@ -24,7 +26,7 @@ func (c *Contact) Submit(w http.ResponseWriter, r *http.Request) {
 	// Honeypot check — if the hidden "website" field has a value, it's a bot
 	if r.FormValue("website") != "" {
 		// Silently return success to avoid tipping off the bot
-		c.renderSuccess(w)
+		c.renderSuccess(w, data.ContactSuccessData{})
 		return
 	}
 
@@ -49,13 +51,20 @@ func (c *Contact) Submit(w http.ResponseWriter, r *http.Request) {
 
 	// In production, this would send an email via SMTP.
 	// For the demo, just log and return success.
-	log.Printf("Contact inquiry from %s <%s> — trip: %s", name, email, r.FormValue("trip"))
+	tripSlug := strings.TrimSpace(r.FormValue("trip"))
+	log.Printf("Contact inquiry from %s <%s> — trip: %s", name, email, tripSlug)
 
-	c.renderSuccess(w)
+	c.renderSuccess(w, data.ContactSuccessData{
+		Name:      name,
+		Email:     email,
+		Trip:      data.TripDisplayName(tripSlug),
+		Dates:     strings.TrimSpace(r.FormValue("dates")),
+		PartySize: strings.TrimSpace(r.FormValue("party_size")),
+	})
 }
 
-func (c *Contact) renderSuccess(w http.ResponseWriter) {
-	if err := c.templates["contact"].ExecuteTemplate(w, "contact-success", nil); err != nil {
+func (c *Contact) renderSuccess(w http.ResponseWriter, successData data.ContactSuccessData) {
+	if err := c.templates["contact"].ExecuteTemplate(w, "contact-success", successData); err != nil {
 		log.Printf("Error rendering contact success: %v", err)
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 	}

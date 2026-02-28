@@ -2,12 +2,19 @@ package data
 
 // PackagesPageData holds all data rendered on the /trips/packages/ page.
 type PackagesPageData struct {
+	Meta     PageMeta
 	Packages []TripSection
 }
 
 // GetPackagesPageData returns seed content for the multi-day packages page.
 func GetPackagesPageData() PackagesPageData {
 	return PackagesPageData{
+		Meta: PageMeta{
+			Title:        "Multi-Day Packages — MT Hunt & Fish Outfitters",
+			Description:  "Multi-day fishing and hunting packages in Montana. The Triple Header (5 days) and the 6-Pack (7 days). Lodging, meals, gear, and guide service included.",
+			CanonicalURL: SiteURL + "/trips/packages/",
+			OGImage:      SiteURL + "/static/img/trips/packages-card-800w.webp",
+		},
 		Packages: []TripSection{
 			{
 				Title:   "Montana Triple Header",

@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{block "title" .}}MT Hunt & Fish Outfitters — Helena, Montana{{end}}</title>
-    <meta name="description" content="{{block "meta-description" .}}Guided fishing and hunting trips out of Helena, Montana. Missouri River trout, elk, deer, bear, and antelope. 25 years of experience. Call Forrest at (406) 459-5352.{{end}}">
+    <title>{{.Meta.Title}}</title>
+    <meta name="description" content="{{.Meta.Description}}">
+    <link rel="canonical" href="{{.Meta.CanonicalURL}}">
 
     <!-- Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='4' fill='%231A1410'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='serif' font-size='18' font-weight='bold' fill='%23B8652A'>MH</text></svg>">
@@ -12,8 +13,10 @@
     <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="MT Hunt & Fish Outfitters">
-    <meta property="og:title" content="{{block "og-title" .}}MT Hunt & Fish Outfitters — Helena, Montana{{end}}">
-    <meta property="og:description" content="{{block "og-description" .}}Guided fishing and hunting trips out of Helena, Montana. Missouri River trout, elk, deer, bear, and antelope.{{end}}">
+    <meta property="og:title" content="{{.Meta.Title}}">
+    <meta property="og:description" content="{{.Meta.Description}}">
+    <meta property="og:url" content="{{.Meta.CanonicalURL}}">
+    <meta property="og:image" content="{{.Meta.OGImage}}">
     <meta property="og:locale" content="en_US">
 
     <!-- Fonts -->
@@ -26,6 +29,40 @@
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://unpkg.com/htmx.org@2.0.4" integrity="sha384-HGfztofotfshcF7+8n44JQL2oJmowVChPTg48S+jvZoztPfvwD79OC/LTtG6dMp+" crossorigin="anonymous"></script>
     <script defer src="/static/js/app.js"></script>
+
+    <!-- LocalBusiness Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "@id": "https://mthuntfish.com/#business",
+        "name": "MT Hunt & Fish Outfitters",
+        "description": "Guided fishing and hunting trips out of Helena, Montana. Missouri River trout, elk, deer, bear, and antelope. 25 years of experience.",
+        "url": "https://mthuntfish.com",
+        "telephone": "+1-406-459-5352",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "610 Jeanne Rd",
+            "addressLocality": "Helena",
+            "addressRegion": "MT",
+            "postalCode": "59602",
+            "addressCountry": "US"
+        },
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 46.5958,
+            "longitude": -112.0270
+        },
+        "areaServed": {
+            "@type": "State",
+            "name": "Montana"
+        },
+        "priceRange": "$$-$$$",
+        "image": "https://mthuntfish.com/static/img/hero/hero-montana-1600w.webp",
+        "sameAs": []
+    }
+    </script>
+    {{block "structured-data" .}}{{end}}
 </head>
 <body class="bg-sand text-ink font-body min-h-screen flex flex-col">
     {{template "nav" .}}

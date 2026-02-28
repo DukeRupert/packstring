@@ -2,12 +2,19 @@ package data
 
 // TripsHubData holds data for the /trips/ hub page.
 type TripsHubData struct {
+	Meta      PageMeta
 	TripCards []TripCard
 }
 
 // GetTripsHubData returns the trip cards displayed on the trips hub page.
 func GetTripsHubData() TripsHubData {
 	return TripsHubData{
+		Meta: PageMeta{
+			Title:        "Guided Trips — MT Hunt & Fish Outfitters",
+			Description:  "Fishing and hunting trips from Helena, Montana. Jet boat, drift boat, wade, and lake fishing. Elk, deer, bear, and antelope hunts. Multi-day packages.",
+			CanonicalURL: SiteURL + "/trips/",
+			OGImage:      SiteURL + "/static/img/hero/hero-montana-1600w.webp",
+		},
 		TripCards: []TripCard{
 			{
 				Title:       "Fishing Trips",

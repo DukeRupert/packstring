@@ -17,6 +17,7 @@ type Testimonial struct {
 
 // HomePageData holds all data rendered on the homepage.
 type HomePageData struct {
+	Meta         PageMeta
 	TripCards    []TripCard
 	Testimonials []Testimonial
 }
@@ -24,6 +25,12 @@ type HomePageData struct {
 // GetHomePageData returns seed content for the homepage.
 func GetHomePageData() HomePageData {
 	return HomePageData{
+		Meta: PageMeta{
+			Title:        "MT Hunt & Fish Outfitters — Helena, Montana Fishing & Hunting Guide",
+			Description:  "Guided fishing and hunting trips out of Helena, Montana. Missouri River trout, elk, deer, bear, and antelope. 25 years of experience. Call Forrest at (406) 459-5352.",
+			CanonicalURL: SiteURL + "/",
+			OGImage:      SiteURL + "/static/img/hero/hero-montana-1600w.webp",
+		},
 		TripCards: []TripCard{
 			{
 				Title:       "Fishing Trips",

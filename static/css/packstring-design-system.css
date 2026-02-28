@@ -241,3 +241,56 @@
   color: var(--color-copper);
   flex-shrink: 0;
 }
+
+
+/* --- Print Stylesheet --- */
+@media print {
+  /* Hide non-content elements */
+  nav,
+  footer,
+  .btn,
+  .golden-glow,
+  .lightbox-backdrop,
+  .section--dark .golden-glow,
+  [x-cloak] {
+    display: none !important;
+  }
+
+  /* Force readable colors */
+  body {
+    background: #fff !important;
+    color: #000 !important;
+    font-size: 12pt;
+  }
+
+  /* Show link URLs */
+  a[href]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    color: #555;
+  }
+
+  a[href^="tel:"]::after,
+  a[href^="javascript:"]::after,
+  a[href^="#"]::after,
+  nav a[href]::after {
+    content: none;
+  }
+
+  /* Prevent page breaks inside trip sections */
+  .trip-sections > section,
+  blockquote,
+  .trip-card {
+    page-break-inside: avoid;
+  }
+
+  /* Remove background images / decorative sections */
+  .section--dark {
+    background: #f5f5f5 !important;
+    color: #000 !important;
+  }
+
+  img {
+    max-width: 100% !important;
+  }
+}

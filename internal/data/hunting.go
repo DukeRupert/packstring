@@ -2,12 +2,19 @@ package data
 
 // HuntingPageData holds all data rendered on the /trips/hunting/ page.
 type HuntingPageData struct {
+	Meta  PageMeta
 	Trips []TripSection
 }
 
 // GetHuntingPageData returns seed content for the hunting trips page.
 func GetHuntingPageData() HuntingPageData {
 	return HuntingPageData{
+		Meta: PageMeta{
+			Title:        "Hunting Trips — MT Hunt & Fish Outfitters",
+			Description:  "Guided elk, deer, bear, and antelope hunts in the Elkhorn and Big Belt mountains near Helena, Montana. Private ranch and public land access.",
+			CanonicalURL: SiteURL + "/trips/hunting/",
+			OGImage:      SiteURL + "/static/img/trips/hunting-card-800w.webp",
+		},
 		Trips: []TripSection{
 			{
 				Title:         "Elk Hunts",

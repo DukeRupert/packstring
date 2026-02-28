@@ -114,7 +114,10 @@ func (a *Admin) RequireAuth(next http.HandlerFunc) http.HandlerFunc {
 }
 
 func (a *Admin) LoginPage(w http.ResponseWriter, r *http.Request) {
-	d := map[string]string{"Error": ""}
+	d := map[string]any{
+		"Meta":  data.PageMeta{Title: "Admin Login — MT Hunt & Fish Outfitters"},
+		"Error": "",
+	}
 	if err := a.templates["admin-login"].ExecuteTemplate(w, "base.html", d); err != nil {
 		log.Printf("Error rendering admin login: %v", err)
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
@@ -129,7 +132,10 @@ func (a *Admin) LoginSubmit(w http.ResponseWriter, r *http.Request) {
 
 	password := r.FormValue("password")
 	if subtle.ConstantTimeCompare([]byte(password), []byte(a.password)) != 1 {
-		d := map[string]string{"Error": "Wrong password. Try again."}
+		d := map[string]any{
+			"Meta":  data.PageMeta{Title: "Admin Login — MT Hunt & Fish Outfitters"},
+			"Error": "Wrong password. Try again.",
+		}
 		w.WriteHeader(http.StatusUnauthorized)
 		if err := a.templates["admin-login"].ExecuteTemplate(w, "base.html", d); err != nil {
 			log.Printf("Error rendering admin login: %v", err)
@@ -187,6 +193,7 @@ func (a *Admin) EditPage(w http.ResponseWriter, r *http.Request) {
 	groups := buildTripGroups(trips)
 
 	d := map[string]any{
+		"Meta":    data.PageMeta{Title: "Availability Editor — MT Hunt & Fish Outfitters"},
 		"Groups":  groups,
 		"Message": "",
 	}
